@@ -75,7 +75,7 @@ jobs:
         ls
         cd openwrt/package
         # git clone --depth 1 https://github.com/zzsj0928/luci-app-pushbot
-        # svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
+        svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
 
     - name: File Patch Before
       run: |
@@ -161,7 +161,7 @@ jobs:
 
         # LuCI插件选择:
         cat >> .config <<EOF
-        # CONFIG_PACKAGE_luci-app-adguardhome is not set
+        CONFIG_PACKAGE_luci-app-adguardhome=y
         # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-argon-config=y
         CONFIG_PACKAGE_luci-app-autoreboot=y
