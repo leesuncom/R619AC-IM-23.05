@@ -81,8 +81,6 @@ jobs:
       run: |
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
-        rm -rf feeds/packages/lang/golang
-        svn co https://github.com/openwrt/packages/branches/openwrt-23.05/lang/golang feeds/packages/lang/golang
         sed '14 iuci\ commit\ network' -i package/emortal/default-settings/files/99-default-settings-chinese
         sed '14 iset\ network.globals.packet_steering=1' -i package/emortal/default-settings/files/99-default-settings-chinese
         sed '29 iset\ system.@system[0].hostname=NeoBird' -i package/emortal/default-settings/files/99-default-settings-chinese
