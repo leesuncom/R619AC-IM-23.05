@@ -172,12 +172,12 @@ jobs:
         CONFIG_PACKAGE_luci-app-ddns=y
         CONFIG_PACKAGE_luci-app-firewall=y
         CONFIG_PACKAGE_luci-app-filetransfer=y
-        CONFIG_PACKAGE_luci-app-passwall=y
+        # CONFIG_PACKAGE_luci-app-passwall is not set
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         CONFIG_PACKAGE_luci-app-ramfree=y
         # CONFIG_PACKAGE_luci-app-samba4 is not set
-        # CONFIG_PACKAGE_luci-app-ssr-plus is not set
-        # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
+        CONFIG_PACKAGE_luci-app-ssr-plus=y
+        CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
         CONFIG_PACKAGE_luci-app-smartdns=y
         # CONFIG_PACKAGE_luci-app-sqm is not set
         CONFIG_PACKAGE_luci-app-ttyd=y
