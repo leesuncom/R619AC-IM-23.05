@@ -75,7 +75,7 @@ jobs:
         ls
         cd openwrt/package
         # git clone --depth 1 https://github.com/zzsj0928/luci-app-pushbot
-        svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
+        # svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
 
     - name: File Patch Before
       run: |
@@ -83,7 +83,7 @@ jobs:
         cd openwrt
         sed '14 iuci\ commit\ network' -i package/emortal/default-settings/files/99-default-settings-chinese
         sed '14 iset\ network.globals.packet_steering=1' -i package/emortal/default-settings/files/99-default-settings-chinese
-        sed '29 iset\ system.@system[0].hostname=NeoBird' -i package/emortal/default-settings/files/99-default-settings-chinese
+        sed '30 iset\ system.@system[0].hostname=NeoBird' -i package/emortal/default-settings/files/99-default-settings-chinese
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
 
     - name: Update feeds
@@ -161,7 +161,7 @@ jobs:
 
         # LuCI插件选择:
         cat >> .config <<EOF
-        CONFIG_PACKAGE_luci-app-adguardhome=y
+        # CONFIG_PACKAGE_luci-app-adguardhome is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-argon-config=y
         CONFIG_PACKAGE_luci-app-autoreboot=y
