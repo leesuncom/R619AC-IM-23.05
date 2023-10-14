@@ -97,6 +97,7 @@ jobs:
         git clone https://github.com/sbwml/luci-app-mosdns -b v5
         git clone https://github.com/sbwml/v2ray-geodata
         # svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
+        
     - name: File Patch Before
       run: |
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
@@ -106,6 +107,7 @@ jobs:
         # sed '30 iset\ system.@system[0].hostname=NeoBird' -i package/emortal/default-settings/files/99-default-settings-chinese
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
+        
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
 
@@ -117,6 +119,7 @@ jobs:
         cd openwrt
         rm -f ./.config*
         touch ./.config
+        
         #
         # ========================固件定制部分========================
         # 
@@ -146,11 +149,13 @@ jobs:
         # 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
         # 
         # 编译竞斗云固件:
+        
         cat >> .config <<EOF
         CONFIG_TARGET_ipq40xx=y
         CONFIG_TARGET_ipq40xx_generic=y
         CONFIG_TARGET_ipq40xx_generic_DEVICE_p2w_r619ac-128m=y
         EOF
+        
         # USB2.0支持:
         # cat >> .config <<EOF
         # CONFIG_PACKAGE_kmod-usb-core=y
@@ -162,6 +167,7 @@ jobs:
         # CONFIG_PACKAGE_kmod-usb-xhci-hcd=y
         # CONFIG_PACKAGE_kmod-usb3=y
         # EOF
+        
         # IPv6支持:
         cat >> .config <<EOF
         CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
@@ -170,12 +176,13 @@ jobs:
         CONFIG_PACKAGE_ip6tables-mod-nat=y
         CONFIG_PACKAGE_ipv6helper=y
         EOF
+        
         # LuCI插件选择:
         cat >> .config <<EOF
         # CONFIG_PACKAGE_luci-app-adguardhome is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-mosdns=y
-        # CONFIG_PACKAGE_luci-app-openclash is not set
+        CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_luci-app-argon-config=y
         CONFIG_PACKAGE_luci-app-autoreboot=y
         CONFIG_PACKAGE_luci-app-commands=y
@@ -183,7 +190,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-ddns=y
         CONFIG_PACKAGE_luci-app-firewall=y
         CONFIG_PACKAGE_luci-app-filetransfer=y
-        CONFIG_PACKAGE_luci-app-passwall=y
+        # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         CONFIG_PACKAGE_luci-app-ramfree=y
         # CONFIG_PACKAGE_luci-app-samba4 is not set
@@ -199,10 +206,12 @@ jobs:
         CONFIG_PACKAGE_luci-app-wol=y
         # CONFIG_PACKAGE_luci-app-zerotier is not set
         EOF
+        
         # LuCI主题:
         cat >> .config <<EOF
         CONFIG_PACKAGE_luci-theme-argon=y
         EOF
+        
         # 常用软件包:
         cat >> .config <<EOF
         CONFIG_PACKAGE_autocore=y
@@ -210,6 +219,7 @@ jobs:
         # CONFIG_PACKAGE_automount is not set
         # CONFIG_PACKAGE_autosamba is not set
         EOF
+        
         # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
         # cat >> .config <<EOF
         # # CONFIG_TARGET_IMAGES_PAD is not set
@@ -221,6 +231,7 @@ jobs:
         
         sed -i 's/^[ \t]*//g' ./.config
         make defconfig
+        
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
@@ -235,6 +246,7 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        
     - name: Compile the firmware
       id: compile
       run: |
@@ -245,6 +257,7 @@ jobs:
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
+        
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
@@ -261,11 +274,13 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
         echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
+        
     - name: Calculate MD5
       run: |
         cd ${{ env.FIRMWARE }} && rm -rf sha256sums
         MD5=$(md5sum * | sed ':a;N;$!ba;s/\n/<br>/g')
         echo "MD5=$MD5" >> $GITHUB_ENV
+        
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
@@ -294,6 +309,7 @@ jobs:
           
           `md5sum`
           > ${{ env.MD5 }}
+          
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
       with:
