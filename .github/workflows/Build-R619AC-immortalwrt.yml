@@ -91,6 +91,7 @@ jobs:
         rm -rf feeds/packages/net/v2ray-geodata
         git clone https://github.com/sbwml/luci-app-mosdns -b v5
         git clone https://github.com/sbwml/v2ray-geodata
+        svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         # svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
         
     - name: File Patch Before
