@@ -97,7 +97,7 @@ jobs:
         rm -rf feeds/packages/net/smartdns
         git clone https://github.com/pymumu/luci-app-smartdns
         svn export https://github.com/leesuncom/custom/trunk/package/smartdns
-        svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
+        svn export https://github.com/NueXini/NueXini_Packages/trunk/luci-app-adguardhome
         
     - name: File Patch Before
       run: |
