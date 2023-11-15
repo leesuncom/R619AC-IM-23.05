@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt
+name:OpenWrt-23.05 IMM
 
 on:
   repository_dispatch:
@@ -93,7 +93,7 @@ jobs:
         git clone https://github.com/sbwml/v2ray-geodata
         rm -rf feeds/packages/net/smartdns
         svn export https://github.com/leesuncom/custom/trunk/package/smartdns
-        # svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
+        svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-adguardhome
         
     - name: File Patch Before
       run: |
@@ -173,7 +173,7 @@ jobs:
         
         # LuCI插件选择:
         cat >> .config <<EOF
-        # CONFIG_PACKAGE_luci-app-adguardhome is not set
+        CONFIG_PACKAGE_luci-app-adguardhome=y
         # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-mosdns=y
         CONFIG_PACKAGE_luci-app-openclash=y
