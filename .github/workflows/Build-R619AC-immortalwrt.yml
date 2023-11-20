@@ -90,16 +90,24 @@ jobs:
         cd openwrt/package      
         mkdir NeoBird
         cd NeoBird
+        
+        # mosdns
         rm -rf feeds/packages/net/v2ray-geodata
         git clone https://github.com/sbwml/luci-app-mosdns -b v5
         git clone https://github.com/sbwml/v2ray-geodata
+        
+        # smartdns
         rm -rf feeds/luci/applications/luci-app-smartdns
-        # rm -rf feeds/packages/net/smartdns
+        rm -rf feeds/packages/net/smartdns
         git clone https://github.com/leesuncom/luci-app-smartdns.git luci-app-smartdns
         svn export https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
         # svn export https://github.com/kenzok8/openwrt-packages/trunk/luci-app-smartdns
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
+        
+        # adguardhome
         svn export https://github.com/NueXini/NueXini_Packages/trunk/luci-app-adguardhome
+        
+        # openclash
         rm -rf feeds/luci/applications/luci-app-openclash
         svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
         
@@ -108,8 +116,7 @@ jobs:
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
-        sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
-        
+        sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate        
         sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
