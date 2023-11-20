@@ -96,12 +96,11 @@ jobs:
         git clone https://github.com/sbwml/luci-app-mosdns -b v5
         git clone https://github.com/sbwml/v2ray-geodata
         
-        # smartdns
+        # smartdns openwrt 23.05
         rm -rf feeds/luci/applications/luci-app-smartdns
         rm -rf feeds/packages/net/smartdns
         git clone https://github.com/leesuncom/luci-app-smartdns.git luci-app-smartdns
         svn export https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
-        # svn export https://github.com/kenzok8/openwrt-packages/trunk/luci-app-smartdns
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         
         # adguardhome
