@@ -99,8 +99,8 @@ jobs:
         # smartdns openwrt 23.05
         rm -rf feeds/luci/applications/luci-app-smartdns
         rm -rf feeds/packages/net/smartdns
-        git clone https://github.com/leesuncom/luci-app-smartdns.git luci-app-smartdns
-        svn export https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
+        git clone https://github.com/leesuncom/luci-app-smartdns.git
+        svn export https://github.com/pymumu/smartdns/trunk/package/openwrt
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         
         # adguardhome
