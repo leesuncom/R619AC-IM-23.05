@@ -99,8 +99,8 @@ jobs:
         # smartdns openwrt 23.05
         rm -rf feeds/luci/applications/luci-app-smartdns
         rm -rf feeds/packages/net/smartdns
-        git clone https://github.com/leesuncom/luci-app-smartdns.git
-        svn export https://github.com/pymumu/smartdns/trunk/package/openwrt
+        # git clone https://github.com/leesuncom/luci-app-smartdns.git
+        # svn export https://github.com/pymumu/smartdns/trunk/package/openwrt
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         
         # adguardhome
@@ -112,6 +112,7 @@ jobs:
         
     - name: File Patch Before
       run: |
+        echo 'src-git smartdns_luci https://github.com/pymumu/luci-app-smartdns.git' >>feeds.conf.default
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
