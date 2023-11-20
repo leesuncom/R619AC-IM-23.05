@@ -98,6 +98,8 @@ jobs:
         svn export https://github.com/kenzok8/openwrt-packages/trunk/luci-app-smartdns
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         svn export https://github.com/NueXini/NueXini_Packages/trunk/luci-app-adguardhome
+        rm -rf feeds/luci/applications/luci-app-openclash
+        svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
         
     - name: File Patch Before
       run: |
