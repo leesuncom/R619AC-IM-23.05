@@ -104,7 +104,7 @@ jobs:
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         
         # adguardhome
-        svn export https://github.com/NueXini/NueXini_Packages/trunk/luci-app-adguardhome
+        # svn export https://github.com/NueXini/NueXini_Packages/trunk/luci-app-adguardhome
         
         # openclash
         rm -rf feeds/luci/applications/luci-app-openclash
@@ -193,7 +193,7 @@ jobs:
         
         # LuCI插件选择:
         cat >> .config <<EOF
-        CONFIG_PACKAGE_luci-app-adguardhome=y
+        # CONFIG_PACKAGE_luci-app-adguardhome is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-mosdns=y
         CONFIG_PACKAGE_luci-app-openclash=y
