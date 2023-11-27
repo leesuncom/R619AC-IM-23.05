@@ -100,6 +100,8 @@ jobs:
         rm -rf feeds/luci/applications/luci-app-smartdns
         rm -rf feeds/packages/net/smartdns
         # git clone https://github.com/leesuncom/luci-app-smartdns.git
+        git clone https://github.com/pymumu/luci-app-smartdns luci-app-smartdns
+        git clone https://github.com/pymumu/smartdns smartdns
         # svn export https://github.com/pymumu/smartdns/trunk/package/openwrt
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         
