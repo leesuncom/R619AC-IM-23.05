@@ -97,8 +97,8 @@ jobs:
         git clone https://github.com/sbwml/v2ray-geodata
         
         # smartdns openwrt 23.05
-        rm -rf feeds/luci/applications/luci-app-smartdns
-        rm -rf feeds/packages/net/smartdns
+        # rm -rf feeds/luci/applications/luci-app-smartdns
+        # rm -rf feeds/packages/net/smartdns
         # git clone https://github.com/leesuncom/luci-app-smartdns.git
         git clone https://github.com/pymumu/luci-app-smartdns luci-app-smartdns
         git clone https://github.com/pymumu/smartdns smartdns
