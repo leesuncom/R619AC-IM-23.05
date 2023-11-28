@@ -88,50 +88,27 @@ jobs:
       run: |
         ls
         cd openwrt/package
-        rm -rf feeds/luci/applications/luci-app-smartdns
-        rm -rf feeds/packages/net/smartdns
-        WORKINGDIR="`pwd`/feeds/packages/net/smartdns"
-        mkdir $WORKINGDIR -p
-        rm $WORKINGDIR/* -fr
-        wget https://github.com/pymumu/openwrt-smartdns/archive/master.zip -O $WORKINGDIR/master.zip
-        unzip $WORKINGDIR/master.zip -d $WORKINGDIR
-        mv $WORKINGDIR/openwrt-smartdns-master/* $WORKINGDIR/
-        rmdir $WORKINGDIR/openwrt-smartdns-master
-        rm $WORKINGDIR/master.zip
-
-        LUCIBRANCH="master" #更换此变量
-        WORKINGDIR="`pwd`/feeds/luci/applications/luci-app-smartdns"
-        mkdir $WORKINGDIR -p
-        rm $WORKINGDIR/* -fr
-        wget https://github.com/pymumu/luci-app-smartdns/archive/${LUCIBRANCH}.zip -O $WORKINGDIR/${LUCIBRANCH}.zip
-        unzip $WORKINGDIR/${LUCIBRANCH}.zip -d $WORKINGDIR
-        mv $WORKINGDIR/luci-app-smartdns-${LUCIBRANCH}/* $WORKINGDIR/
-        rmdir $WORKINGDIR/luci-app-smartdns-${LUCIBRANCH}
-        rm $WORKINGDIR/${LUCIBRANCH}.zip
-        
         mkdir NeoBird
         cd NeoBird
         
         # mosdns
-        rm -rf feeds/packages/net/v2ray-geodata
+        # rm -rf feeds/packages/net/v2ray-geodata
         git clone https://github.com/sbwml/luci-app-mosdns -b v5
-        git clone https://github.com/sbwml/v2ray-geodata
+        # git clone https://github.com/sbwml/v2ray-geodata
         
         # smartdns openwrt 23.05
         # rm -rf feeds/luci/applications/luci-app-smartdns
         # rm -rf feeds/packages/net/smartdns
-        # git clone https://github.com/leesuncom/luci-app-smartdns.git
         # git clone https://github.com/pymumu/luci-app-smartdns luci-app-smartdns
         # git clone https://github.com/pymumu/smartdns smartdns
-        # svn export https://github.com/pymumu/smartdns/trunk/package/openwrt
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
         
         # adguardhome
         # svn export https://github.com/NueXini/NueXini_Packages/trunk/luci-app-adguardhome
         
         # openclash
-        rm -rf feeds/luci/applications/luci-app-openclash
-        svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
+        # rm -rf feeds/luci/applications/luci-app-openclash
+        # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
         
     - name: File Patch Before
       run: |        
