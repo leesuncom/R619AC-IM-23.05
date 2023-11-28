@@ -104,16 +104,20 @@ jobs:
         # git clone https://github.com/pymumu/smartdns smartdns
         # svn export https://github.com/pymumu/smartdns/trunk/package/openwrt
         # svn export https://github.com/leesuncom/custom/trunk/package/smartdns
-          wget https://github.com/pymumu/openwrt-smartdns/archive/master.zip -O openwrt-smartdns/master.zip
-          unzip openwrt-smartdns/master.zip -d openwrt-smartdns
-          mv openwrt-smartdns/openwrt-smartdns-master/* openwrt-smartdns/
-          rmdir openwrt-smartdns/openwrt-smartdns-master
-          rm openwrt-smartdns/master.zip
-          wget https://github.com/pymumu/luci-app-smartdns/archive/master.zip -O luci-app-smartdns/master.zip
-          unzip luci-app-smartdns/master.zip -d luci-app-smartdns
-          mv luci-app-smartdns/luci-app-smartdns-master/* luci-app-smartdns/
-          rmdir luci-app-smartdns/luci-app-smartdns-master
-          rm luci-app-smartdns/master.zip
+        mkdir openwrt-smartdns -p
+        rm openwrt-smartdns/* -fr
+        wget https://github.com/pymumu/openwrt-smartdns/archive/master.zip -O openwrt-smartdns/master.zip
+        unzip openwrt-smartdns/master.zip -d openwrt-smartdns
+        mv openwrt-smartdns/openwrt-smartdns-master/* openwrt-smartdns/
+        rmdir openwrt-smartdns/openwrt-smartdns-master
+        rm openwrt-smartdns/master.zip
+        mkdir luci-app-smartdns -p
+        rm luci-app-smartdns/* -fr
+        wget https://github.com/pymumu/luci-app-smartdns/archive/master.zip -O luci-app-smartdns/master.zip
+        unzip luci-app-smartdns/master.zip -d luci-app-smartdns
+        mv luci-app-smartdns/luci-app-smartdns-master/* luci-app-smartdns/
+        rmdir luci-app-smartdns/luci-app-smartdns-master
+        rm luci-app-smartdns/master.zip
         
         # adguardhome
         # svn export https://github.com/NueXini/NueXini_Packages/trunk/luci-app-adguardhome
