@@ -92,9 +92,10 @@ jobs:
         cd NeoBird
         
         # mosdns
-        # rm -rf feeds/packages/net/v2ray-geodata
+        rm -rf feeds/packages/net/v2ray-geodata
+        rm -rf feeds/packages/net/mosdns
         git clone https://github.com/sbwml/luci-app-mosdns -b v5
-        # git clone https://github.com/sbwml/v2ray-geodata
+        git clone https://github.com/sbwml/v2ray-geodata
         
         # smartdns openwrt 23.05
         # rm -rf feeds/luci/applications/luci-app-smartdns
