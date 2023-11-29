@@ -121,7 +121,7 @@ jobs:
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
         sed  "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
+        sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shsll date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
