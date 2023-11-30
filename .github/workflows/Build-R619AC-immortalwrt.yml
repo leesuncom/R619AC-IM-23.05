@@ -110,12 +110,25 @@ jobs:
         # openclash
         # rm -rf feeds/luci/applications/luci-app-openclash
         # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
+
+        # IPTV助手
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
+
+        # 动态域名助手
+        rm -rf feeds/luci/applications/luci-app-ddns-go
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ddns-go
+
+        # 智能家居
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-homeassistant
+        
+        # 网络唤醒++
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-wolplus
         
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
-        sed -i 's/192.168.1.1/192.168.1.111/g' package/base-files/files/bin/config_generate
+        sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate        
         sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
@@ -194,7 +207,10 @@ jobs:
         
         # LuCI插件选择:
         cat >> .config <<EOF
+        CONFIG_PACKAGE_luci-app-arpbind=y
         CONFIG_PACKAGE_luci-app-adguardhome=y
+        CONFIG_PACKAGE_luci-app-iptvhelper=y
+        CONFIG_PACKAGE_luci-app-ddns-go=y
         # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-mosdns=y
         CONFIG_PACKAGE_luci-app-openclash=y
@@ -202,9 +218,10 @@ jobs:
         CONFIG_PACKAGE_luci-app-autoreboot=y
         CONFIG_PACKAGE_luci-app-commands=y
         CONFIG_PACKAGE_luci-app-opkg=y
-        CONFIG_PACKAGE_luci-app-ddns=y
+        # CONFIG_PACKAGE_luci-app-ddns is not set
         CONFIG_PACKAGE_luci-app-firewall=y
-        CONFIG_PACKAGE_luci-app-filetransfer=y
+        # CONFIG_PACKAGE_luci-app-filetransfer is not set
+        CONFIG_PACKAGE_luci-app-luci-app-filebrowser=y
         # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         CONFIG_PACKAGE_luci-app-ramfree=y
@@ -218,7 +235,8 @@ jobs:
         CONFIG_PACKAGE_luci-app-udpxy=y
         # CONFIG_PACKAGE_luci-app-vsftpd is not set
         CONFIG_PACKAGE_luci-app-vlmcsd=y
-        CONFIG_PACKAGE_luci-app-wol=y
+        # CONFIG_PACKAGE_luci-app-wol is not set
+        CONFIG_PACKAGE_luci-app-watchcat=y
         # CONFIG_PACKAGE_luci-app-zerotier is not set
         EOF
         
