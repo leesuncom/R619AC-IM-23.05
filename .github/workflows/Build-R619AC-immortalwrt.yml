@@ -318,7 +318,7 @@ jobs:
       uses: ncipollo/release-action@v1
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: R${{ steps.organize.outputs.release_tag }} for R619AC
+        name: ${{ steps.organize.outputs.release_tag }} for R619AC-128M
         allowUpdates: true
         removeArtifacts: true
         tag: ${{ steps.organize.outputs.release_tag }}
