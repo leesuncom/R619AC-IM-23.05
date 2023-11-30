@@ -218,7 +218,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-ddns is not set
         CONFIG_PACKAGE_luci-app-firewall=y
         # CONFIG_PACKAGE_luci-app-filetransfer is not set
-        CONFIG_PACKAGE_luci-app-luci-app-filebrowser=y
+        CONFIG_PACKAGE_luci-app-filebrowser=y
         # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         CONFIG_PACKAGE_luci-app-ramfree=y
