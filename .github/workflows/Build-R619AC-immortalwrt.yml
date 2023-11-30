@@ -113,6 +113,7 @@ jobs:
 
         # IPTV助手
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper
 
         # 动态域名助手
         rm -rf feeds/luci/applications/luci-app-ddns-go
