@@ -117,9 +117,6 @@ jobs:
         # 动态域名助手
         rm -rf feeds/luci/applications/luci-app-ddns-go
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ddns-go
-
-        # 智能家居
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-homeassistant
         
         # 网络唤醒++
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-wolplus
