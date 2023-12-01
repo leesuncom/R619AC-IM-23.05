@@ -105,7 +105,7 @@ jobs:
         svn export https://github.com/kiddin9/openwrt-packages/trunk//smartdns
         
         # adguardhome
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome
+        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome
         
         # openclash
         # rm -rf feeds/luci/applications/luci-app-openclash
@@ -206,7 +206,7 @@ jobs:
         # LuCI插件选择:
         cat >> .config <<EOF
         CONFIG_PACKAGE_luci-app-arpbind=y
-        CONFIG_PACKAGE_luci-app-adguardhome=y
+        # CONFIG_PACKAGE_luci-app-adguardhome is not set
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
