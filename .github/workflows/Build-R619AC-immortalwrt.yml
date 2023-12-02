@@ -106,8 +106,8 @@ jobs:
         # svn export https://github.com/kiddin9/openwrt-packages/trunk//smartdns
         
         # adguardhome
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome
-        git clone https://github.com/rufengsuixing/luci-app-adguardhome.git
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome
+        # git clone https://github.com/rufengsuixing/luci-app-adguardhome.git
         
         # openclash
         rm -rf feeds/luci/applications/luci-app-openclash
