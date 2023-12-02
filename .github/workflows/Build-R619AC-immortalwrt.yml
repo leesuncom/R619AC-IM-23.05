@@ -107,7 +107,7 @@ jobs:
         
         # adguardhome
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome
         
         # openclash
         # rm -rf feeds/luci/applications/luci-app-openclash
