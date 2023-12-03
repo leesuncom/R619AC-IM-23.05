@@ -135,6 +135,7 @@ jobs:
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
         sed "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "34a\echo \"DISTRIB_DESCRIPTION=\'BrianLuo Compiled in $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt 23.05 \'\" >> /etc/openwrt_release" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         
     - name: 更新订阅源
@@ -209,7 +210,8 @@ jobs:
         # LuCI插件选择:
         cat >> .config <<EOF
         CONFIG_PACKAGE_luci-app-arpbind=y
-        CONFIG_PACKAGE_luci-app-adguardhome=y
+        # CONFIG_PACKAGE_luci-app-adguardhome is not set
+        CONFIG_PACKAGE_luci-app-adguardhome_INCLUDE_binary=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
