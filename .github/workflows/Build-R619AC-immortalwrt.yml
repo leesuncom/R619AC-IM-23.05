@@ -101,10 +101,10 @@ jobs:
         rm -rf feeds/luci/applications/luci-app-smartdns
         rm -rf feeds/packages/net/smartdns
         # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-smartdns
-        git clone -b master https://github.com/pymumu/luci-app-smartdns.git luci-app-smartdns/
-        git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns/
+        git clone -b master https://github.com/pymumu/luci-app-smartdns.git
+        git clone -b 23.05 https://github.com/leesuncom/smartdns.git
         # git clone https://github.com/pymumu/smartdns smartdns
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk//smartdns
+        # svn export https://github.com/kiddin9/openwrt-packages/trunk/smartdns
         
         # adguardhome
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome        
@@ -240,6 +240,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-udpxy is not set
         # CONFIG_PACKAGE_luci-app-vsftpd is not set
         CONFIG_PACKAGE_luci-app-vlmcsd=y
+        CONFIG_PACKAGE_luci-app-wolplus=y        
         # CONFIG_PACKAGE_luci-app-wol is not set
         # CONFIG_PACKAGE_luci-app-watchcat is not set
         # CONFIG_PACKAGE_luci-app-zerotier is not set
@@ -252,7 +253,6 @@ jobs:
         
         # 常用软件包:
         cat >> .config <<EOF
-        CONFIG_PACKAGE_luci-ssl=y # uhttpd服务
         CONFIG_PACKAGE_autocore=y
         CONFIG_PACKAGE_default-settings-chn=y
         # CONFIG_PACKAGE_automount is not set
