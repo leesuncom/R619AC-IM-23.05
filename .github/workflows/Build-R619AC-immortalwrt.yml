@@ -113,6 +113,9 @@ jobs:
        # NET目录
         
         cd openwrt/feeds/packages/net 
+        ########### 替换immortal的内置的adguardhome版本 ###########
+        rm -rf adguardhome/
+        
         ########### 替换immortal的内置的smartdns版本 ###########
         rm -rf smartdns/
         git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns/
@@ -148,12 +151,15 @@ jobs:
         
         ########### 修改immortal的内置的luci-app-mosdns版本 ###########
         rm -rf luci-app-mosdns/
-        git clone https://github.com/sbwml/luci-app-mosdns -b v5 luci-app-mosdns
+        git clone https://github.com/sbwml/luci-app-mosdns -b v5 feeds/luci/applications/luci-app-mosdns/
         rm -rf luci-app-mosdns/.git/
 
         ########### 修改immortal的内置的IPTV助手版本 ###########
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper luci-app-iptvhelper/
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper iptvhelper/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper feeds/luci/applications/luci-app-iptvhelper/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper feeds/luci/applications/iptvhelper/
+
+        ########### 修改immortal的内置的luci-app-adguardhome版本 ###########
+        svn export https://github.com/kiddin9/openwrt-packages/tree/master/luci-app-adguardhome feeds/luci/applications/luci-app-adguardhome/
         
         cd ../../../..
                 
