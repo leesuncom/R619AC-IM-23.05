@@ -86,7 +86,7 @@ jobs:
       env:
         SCKEY: ${{ secrets.ACTIONS_TRIGGER_PAT }}
       run: |
-        ls
+        # ls
         # NET目录
         
         cd openwrt/feeds/packages/net 
