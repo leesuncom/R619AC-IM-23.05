@@ -87,43 +87,53 @@ jobs:
         SCKEY: ${{ secrets.ACTIONS_TRIGGER_PAT }}
       run: |
         ls
-        cd openwrt/package
-        mkdir NeoBird
-        cd NeoBird
+        # NET目录
         
-        # mosdns
-        rm -rf feeds/packages/net/v2ray-geodata
-        rm -rf feeds/packages/net/mosdns
-        git clone https://github.com/sbwml/luci-app-mosdns -b v5
-        git clone https://github.com/sbwml/v2ray-geodata
+        cd feeds/packages/net 
+        ########### 替换immortal的内置的smartdns版本 ###########
+        rm -rf smartdns/
+        git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns/
+        rm -rf smartdns/.git/
+
+        ########### 替换immortal的内置的v2ray-geodata版本 ###########
+        rm -rf v2ray-geodata/
+        git clone https://github.com/sbwml/v2ray-geodata v2ray-geodata/
+        rm -rf v2ray-geodata/.git/
+
+        ########### 替换immortal的内置的mosdns版本 ###########
+        rm -rf mosdns/
+        # git clone https://github.com/sbwml/luci-app-mosdns -b v5 mosdns/
+        # rm -rf mosdns/.git/
+      
+        cd ../../..
         
-        # smartdns openwrt 23.05
-        # rm -rf feeds/luci/applications/luci-app-smartdns
-        # rm -rf feeds/packages/net/smartdns
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-smartdns
-        # git clone -b master https://github.com/pymumu/luci-app-smartdns.git
-        # git clone -b 23.05 https://github.com/leesuncom/smartdns.git
-        # git clone https://github.com/pymumu/smartdns smartdns
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/smartdns
-        
-        # adguardhome
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome        
-        # git clone https://github.com/rufengsuixing/luci-app-adguardhome.git
-        
-        # openclash
-        # rm -rf feeds/luci/applications/luci-app-openclash
+        # LUIC目录
+        cd feeds/luci/applications 
+        ########### 修改immortal的内置的luci-app-smartdns版本 ###########
+        rm -rf luci-app-smartdns/
+        git clone -b master https://github.com/pymumu/luci-app-smartdns.git luci-app-smartdns/
+        rm -rf luci-app-smartdns/.git/
+
+        ########### 修改immortal的内置的openclash版本 ###########
+        rm -rf luci-app-openclash/
+        svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash luci-app-openclash/
         # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
-
-        # IPTV助手
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper
-
-        # 动态域名助手
-        # rm -rf feeds/luci/applications/luci-app-ddns-go
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ddns-go
+        rm -rf luci-app-openclash/.svn/
+        sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
+        rm luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
+        wget -P luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
         
-        # 网络唤醒++
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-wolplus
+        ########### 修改immortal的内置的luci-app-mosdns版本 ###########
+        rm -rf luci-app-mosdns/
+        git clone https://github.com/sbwml/luci-app-mosdns -b v5 luci-app-mosdns
+        rm -rf luci-app-mosdns/.git/
+
+        ########### 修改immortal的内置的IPTV助手版本 ###########
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper luci-app-iptvhelper/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper iptvhelper/
+        
+        cd ../../..
+
         
     - name: 文件修补一
       run: |        
@@ -214,6 +224,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
+        # CONFIG_PACKAGE_luci-app-ddns is not set
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-mosdns=y
@@ -222,10 +233,8 @@ jobs:
         CONFIG_PACKAGE_luci-app-autoreboot=y
         CONFIG_PACKAGE_luci-app-commands=y
         CONFIG_PACKAGE_luci-app-opkg=y
-        # CONFIG_PACKAGE_luci-app-ddns is not set
         CONFIG_PACKAGE_luci-app-firewall=y
-        # CONFIG_PACKAGE_luci-app-filetransfer is not set
-        CONFIG_PACKAGE_luci-app-filebrowser=y
+        CONFIG_PACKAGE_luci-app-filetransfer=y
         # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         # CONFIG_PACKAGE_luci-app-ramfree is not set
@@ -238,8 +247,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-upnp=y
         # CONFIG_PACKAGE_luci-app-udpxy is not set
         # CONFIG_PACKAGE_luci-app-vsftpd is not set
-        CONFIG_PACKAGE_luci-app-vlmcsd=y
-        # CONFIG_PACKAGE_luci-app-wolplus=y        
+        CONFIG_PACKAGE_luci-app-vlmcsd=y     
         CONFIG_PACKAGE_luci-app-wol=y
         # CONFIG_PACKAGE_luci-app-watchcat is not set
         # CONFIG_PACKAGE_luci-app-zerotier is not set
