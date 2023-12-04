@@ -112,54 +112,44 @@ jobs:
       run: |
        # NET目录
         
-        cd openwrt/feeds/packages/net 
+        cd openwrt 
         ########### 替换immortal的内置的adguardhome版本 ###########
-        rm -rf adguardhome/
+        rm -rf feeds/packages/netadguardhome
         svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome adguardhome/
-        rm -rf adguardhome/.svn/
-        
+            
         ########### 替换immortal的内置的smartdns版本 ###########
-        rm -rf smartdns/
+        rm -rf feeds/packages/smartdns
         git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns/
-        rm -rf smartdns/.git/
-
+  
         ########### 替换immortal的内置的v2ray-geodata版本 ###########
-        rm -rf v2ray-geodata/
+        rm -rf feeds/packages/v2ray-geodata
         svn export https://github.com/kiddin9/openwrt-packages/trunk/v2ray-geodata v2ray-geodata/
-        rm -rf v2ray-geodata/.svn/
-
+   
         ########### 替换immortal的内置的mosdns版本 ###########
-        rm -rf mosdns/
+        rm -rf feeds/packages/mosdns
         svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns mosdns/
-        rm -rf mosdns/.svn/
 
         ########### 替换immortal的内置的v2dat版本 ###########
-        rm -rf v2dat/
+        rm -rf feeds/packages/v2dat
         svn export https://github.com/kiddin9/openwrt-packages/trunk/v2dat v2dat/
-        rm -rf v2dat/.svn/
-      
-        cd ../../../..
-        
+   
         # LUIC目录
-        cd openwrt/feeds/luci/applications 
+
         ########### 修改immortal的内置的luci-app-smartdns版本 ###########
-        rm -rf luci-app-smartdns/
+        rm -rf feeds/luci/applications/luci-app-smartdns
         git clone -b master https://github.com/pymumu/luci-app-smartdns.git luci-app-smartdns/
-        rm -rf luci-app-smartdns/.git/
 
         ########### 修改immortal的内置的openclash版本 ###########
-        rm -rf luci-app-openclash/
+        rm -rf feeds/luci/applications/luci-app-openclash
         svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash luci-app-openclash/
         # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
-        rm -rf luci-app-openclash/.svn/
         sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
         rm luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
         wget -P luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
         
         ########### 修改immortal的内置的luci-app-mosdns版本 ###########
-        rm -rf luci-app-mosdns/
+        rm -rf feeds/luci/applications/luci-app-mosdns
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-mosdns luci-app-mosdns/
-        rm -rf luci-app-mosdns/.svn/
 
         ########### 修改immortal的内置的IPTV助手版本 ###########
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper luci-app-iptvhelper/
@@ -168,7 +158,6 @@ jobs:
         ########### 修改immortal的内置的luci-app-adguardhome版本 ###########
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome luci-app-adguardhome/
         
-        cd ../../../..
                 
     - name: 生成配置文件
       run: |
