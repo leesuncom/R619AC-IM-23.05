@@ -211,8 +211,7 @@ jobs:
         # LuCI插件选择:
         cat >> .config <<EOF
         CONFIG_PACKAGE_luci-app-arpbind=y
-        # CONFIG_PACKAGE_luci-app-adguardhome is not set
-        CONFIG_PACKAGE_luci-app-adguardhome_INCLUDE_binary=y
+        CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
