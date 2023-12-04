@@ -89,7 +89,7 @@ jobs:
         ls
         # NET目录
         
-        cd feeds/packages/net 
+        cd openwrt/feeds/packages/net 
         ########### 替换immortal的内置的smartdns版本 ###########
         rm -rf smartdns/
         git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns/
@@ -108,7 +108,7 @@ jobs:
         cd ../../..
         
         # LUIC目录
-        cd feeds/luci/applications 
+        cd openwrt/feeds/luci/applications 
         ########### 修改immortal的内置的luci-app-smartdns版本 ###########
         rm -rf luci-app-smartdns/
         git clone -b master https://github.com/pymumu/luci-app-smartdns.git luci-app-smartdns/
