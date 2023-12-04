@@ -90,11 +90,12 @@ jobs:
         cd openwrt/package
         mkdir NeoBird
         cd NeoBird
+        
+        # NET目录
+        
         ########### 替换immortal的内置的adguardhome版本 ###########
         
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome adguardhome
-            
-        
+        # svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome adguardhome
   
         ########### 替换immortal的内置的v2ray-geodata版本 ###########
         
@@ -121,7 +122,6 @@ jobs:
         ########### 修改immortal的内置的openclash版本 ###########
         
         svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash luci-app-openclash
-        # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
         sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
         rm luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
         wget -P luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
@@ -141,7 +141,7 @@ jobs:
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
-        # cp patch/999-ipq40xx-unlock-cpu-frequency.patch openwrt/target/linux/ipq40xx/patches-5.15/
+        cp patch/999-ipq40xx-unlock-cpu-frequency.patch openwrt/target/linux/ipq40xx/patches-5.15/
         cd openwrt
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate        
@@ -149,8 +149,8 @@ jobs:
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
-        sed "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "34a\echo \"DISTRIB_DESCRIPTION=\'BrianLuo Compiled in $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt 23.05 \'\" >> /etc/openwrt_release" package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese
+        sed "34i echo DISTRIB_DESCRIPTION='BrianLuo Compiled in $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt 23.05 ' >> /etc/openwrt_release" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         
     - name: 更新订阅源
