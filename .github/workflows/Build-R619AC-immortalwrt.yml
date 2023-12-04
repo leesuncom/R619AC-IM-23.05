@@ -145,9 +145,9 @@ jobs:
         rm -rf feeds/luci/applications/luci-app-openclash
         svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash NeoBird/luci-app-openclash
         # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
-        sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
-        rm luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
-        wget -P luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
+        sed -i 's/clashversion_check();/\/\/&/g' NeoBird/luci-app-openclash/luasrc/view/openclash/status.htm
+        rm NeoBird/luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
+        wget -P NeoBird/luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
         
         ########### 修改immortal的内置的luci-app-mosdns版本 ###########
         rm -rf feeds/luci/applications/luci-app-mosdns
