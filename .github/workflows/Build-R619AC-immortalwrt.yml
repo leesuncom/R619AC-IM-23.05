@@ -115,6 +115,8 @@ jobs:
         cd openwrt/feeds/packages/net 
         ########### 替换immortal的内置的adguardhome版本 ###########
         rm -rf adguardhome/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome adguardhome/
+        rm -rf adguardhome/.svn/
         
         ########### 替换immortal的内置的smartdns版本 ###########
         rm -rf smartdns/
@@ -123,13 +125,18 @@ jobs:
 
         ########### 替换immortal的内置的v2ray-geodata版本 ###########
         rm -rf v2ray-geodata/
-        git clone https://github.com/sbwml/v2ray-geodata v2ray-geodata/
-        rm -rf v2ray-geodata/.git/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/v2ray-geodata v2ray-geodata/
+        rm -rf v2ray-geodata/.svn/
 
         ########### 替换immortal的内置的mosdns版本 ###########
         rm -rf mosdns/
-        # git clone https://github.com/sbwml/luci-app-mosdns -b v5 mosdns/
-        # rm -rf mosdns/.git/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns mosdns/
+        rm -rf mosdns/.svn/
+
+        ########### 替换immortal的内置的v2dat版本 ###########
+        rm -rf v2dat/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/v2dat v2dat/
+        rm -rf v2dat/.svn/
       
         cd ../../../..
         
@@ -151,15 +158,15 @@ jobs:
         
         ########### 修改immortal的内置的luci-app-mosdns版本 ###########
         rm -rf luci-app-mosdns/
-        git clone https://github.com/sbwml/luci-app-mosdns -b v5 feeds/luci/applications/luci-app-mosdns/
-        rm -rf luci-app-mosdns/.git/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-mosdns luci-app-mosdns/
+        rm -rf luci-app-mosdns/.svn/
 
         ########### 修改immortal的内置的IPTV助手版本 ###########
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper feeds/luci/applications/luci-app-iptvhelper/
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper feeds/luci/applications/iptvhelper/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper luci-app-iptvhelper/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper iptvhelper/
 
         ########### 修改immortal的内置的luci-app-adguardhome版本 ###########
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome feeds/luci/applications/luci-app-adguardhome/
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome luci-app-adguardhome/
         
         cd ../../../..
                 
@@ -348,10 +355,10 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ${{ env.FIRMWARE }}/*
         body: |
-          ✅ 源码版本:23.05SNAPSHOT
-          ✅ 内核:5.15
-          ✅ 当前使用版本:【编译前的最后一次[➦主源码](${{ env.REPO_URL }})更新记录】
-          ✅ 下载后请仔细校验MD5，如不正确请重新下载
+          🚀 源码版本:23.05SNAPSHOT
+          🎈 内核:5.15
+          🎨 当前使用版本:【编译前的最后一次[➦主源码](${{ env.REPO_URL }})更新记录】
+          🔥 下载后请仔细校验MD5，如不正确请重新下载
           ${{ env.useVersionInfo }}
           
           `md5sum`
