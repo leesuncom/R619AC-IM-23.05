@@ -94,9 +94,7 @@ jobs:
         
         svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome adguardhome
             
-        ########### 替换immortal的内置的smartdns版本 ###########
         
-        git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns
   
         ########### 替换immortal的内置的v2ray-geodata版本 ###########
         
@@ -114,7 +112,11 @@ jobs:
 
         ########### 修改immortal的内置的luci-app-smartdns版本 ###########
         
-        git clone -b master https://github.com/pymumu/luci-app-smartdns.git luci-app-smartdns
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-smartdns luci-app-smartdns
+        
+        ########### 替换immortal的内置的smartdns版本 ###########
+        
+        git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns
 
         ########### 修改immortal的内置的openclash版本 ###########
         
