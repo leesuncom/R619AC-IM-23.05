@@ -89,7 +89,51 @@ jobs:
         ls
         cd openwrt/package
         mkdir NeoBird
-        # cd NeoBird
+        cd NeoBird
+        ########### 替换immortal的内置的adguardhome版本 ###########
+        
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome adguardhome
+            
+        ########### 替换immortal的内置的smartdns版本 ###########
+        
+        git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns
+  
+        ########### 替换immortal的内置的v2ray-geodata版本 ###########
+        
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/v2ray-geodata v2ray-geodata
+   
+        ########### 替换immortal的内置的mosdns版本 ###########
+        
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns mosdns
+
+        ########### 替换immortal的内置的v2dat版本 ###########
+        
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/v2dat v2dat
+   
+        # LUIC目录
+
+        ########### 修改immortal的内置的luci-app-smartdns版本 ###########
+        
+        git clone -b master https://github.com/pymumu/luci-app-smartdns.git luci-app-smartdns
+
+        ########### 修改immortal的内置的openclash版本 ###########
+        
+        svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash luci-app-openclash
+        # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
+        sed -i 's/clashversion_check();/\/\/&/g' NeoBird/luci-app-openclash/luasrc/view/openclash/status.htm
+        rm NeoBird/luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
+        wget -P NeoBird/luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
+        
+        ########### 修改immortal的内置的luci-app-mosdns版本 ###########
+        
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-mosdns NeoBird/luci-app-mosdns
+
+        ########### 修改immortal的内置的IPTV助手版本 ###########
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper luci-app-iptvhelper
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper iptvhelper/
+
+        ########### 修改immortal的内置的luci-app-adguardhome版本 ###########
+        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome luci-app-adguardhome
 
         
     - name: 文件修补一
@@ -112,54 +156,13 @@ jobs:
 
     - name: 文件修补二
       run: |
-       # NET目录
-        
-        cd openwrt 
-        ########### 替换immortal的内置的adguardhome版本 ###########
-        rm -rf feeds/packages/netadguardhome
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome NeoBird/adguardhome
-            
-        ########### 替换immortal的内置的smartdns版本 ###########
-        rm -rf feeds/packages/smartdns
-        git clone -b 23.05 https://github.com/leesuncom/smartdns.git NeoBird/smartdns
-  
-        ########### 替换immortal的内置的v2ray-geodata版本 ###########
-        rm -rf feeds/packages/v2ray-geodata
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/v2ray-geodata NeoBird/v2ray-geodata
-   
-        ########### 替换immortal的内置的mosdns版本 ###########
-        rm -rf feeds/packages/mosdns
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns NeoBird/mosdns
-
-        ########### 替换immortal的内置的v2dat版本 ###########
-        rm -rf feeds/packages/v2dat
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/v2dat NeoBird/v2dat
-   
-        # LUIC目录
-
-        ########### 修改immortal的内置的luci-app-smartdns版本 ###########
-        rm -rf feeds/luci/applications/luci-app-smartdns
-        git clone -b master https://github.com/pymumu/luci-app-smartdns.git NeoBird/luci-app-smartdns
-
-        ########### 修改immortal的内置的openclash版本 ###########
-        rm -rf feeds/luci/applications/luci-app-openclash
-        svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash NeoBird/luci-app-openclash
-        # svn export https://github.com/haiibo/openwrt-packages/trunk/luci-app-openclash
-        sed -i 's/clashversion_check();/\/\/&/g' NeoBird/luci-app-openclash/luasrc/view/openclash/status.htm
-        rm NeoBird/luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
-        wget -P NeoBird/luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
-        
-        ########### 修改immortal的内置的luci-app-mosdns版本 ###########
-        rm -rf feeds/luci/applications/luci-app-mosdns
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-mosdns NeoBird/luci-app-mosdns
-
-        ########### 修改immortal的内置的IPTV助手版本 ###########
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper NeoBird/luci-app-iptvhelper
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper iptvhelper/
-
-        ########### 修改immortal的内置的luci-app-adguardhome版本 ###########
-        svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome NeoBird/luci-app-adguardhome
-        
+       rm -rf feeds/luci/applications/luci-app-openclash
+       rm -rf feeds/luci/applications/luci-app-mosdns
+       rm -rf feeds/luci/applications/luci-app-smartdns
+       rm -rf feeds/packages/net/mosdns
+       rm -rf feeds/packages/net/adguardhome
+       rm -rf feeds/packages/net/v2ray-geodata
+       rm -rf feeds/packages/net/smartdns              
                 
     - name: 生成配置文件
       run: |
