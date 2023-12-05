@@ -284,7 +284,7 @@ jobs:
         
         # 常用软件包:
         cat >> .config <<EOF
-        CONFIG_PACKAGE_autocore=y
+        # CONFIG_PACKAGE_autocore is not set
         CONFIG_PACKAGE_default-settings-chn=y
         # CONFIG_PACKAGE_automount is not set
         # CONFIG_PACKAGE_autosamba is not set
