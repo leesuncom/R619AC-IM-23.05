@@ -140,22 +140,18 @@ jobs:
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
-        # cp patch/999-ipq40xx-unlock-cpu-frequency.patch openwrt/target/linux/ipq40xx/patches-5.15/
+
         cd openwrt
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
         
-        grep -q "1.8.8" package/network/utils/iptables/Makefile && {
-        rm -rf package/network/utils/iptables
-        svn export https://github.com/openwrt/openwrt/branches/openwrt-22.03/package/network/utils/iptables package/network/utils/iptables}
-        grep -q 'PKG_RELEASE:=9' package/libs/openssl/Makefile && {
-        sh -c "curl -sfL https://github.com/openwrt/openwrt/commit/a48d0bdb77eb93f7fba6e055dace125c72755b6a.patch | patch -d './' -p1 --forward"}
+
         sed -i "/BuildPackage,miniupnpd-iptables/d" feeds/packages/net/miniupnpd/Makefile
         sed -i 's/Os/O2/g' include/target.mk
-        sed -i "/mediaurlbase/d" package/feeds/*/luci-theme*/root/etc/uci-defaults/*
+
         sed -i 's/=bbr/=cubic/' package/kernel/linux/files/sysctl-tcp-bbr.conf
         sed -i 's/max_requests 3/max_requests 20/g' package/network/services/uhttpd/files/uhttpd.config
-        sed -i "s/tty\(0\|1\)::askfirst/tty\1::respawn/g" target/linux/*/base-files/etc/inittab
+        sed -i "s/tty\(0\|1\)::askfirst/tty\1::respawn/g" target/linux/ipq40xx/base-files/etc/inittab
          
         sed -i "s/CONFIG_WERROR=y/CONFIG_WERROR=n/" target/linux/generic/config-5.15
         sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
