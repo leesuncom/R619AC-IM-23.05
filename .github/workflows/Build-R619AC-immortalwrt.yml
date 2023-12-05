@@ -146,12 +146,12 @@ jobs:
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
         
 
-        sed -i "/BuildPackage,miniupnpd-iptables/d" feeds/packages/net/miniupnpd/Makefile
-        sed -i 's/Os/O2/g' include/target.mk
+        # sed -i "/BuildPackage,miniupnpd-iptables/d" feeds/packages/net/miniupnpd/Makefile
+        # sed -i 's/Os/O2/g' include/target.mk
 
-        sed -i 's/=bbr/=cubic/' package/kernel/linux/files/sysctl-tcp-bbr.conf
-        sed -i 's/max_requests 3/max_requests 20/g' package/network/services/uhttpd/files/uhttpd.config
-        sed -i "s/tty\(0\|1\)::askfirst/tty\1::respawn/g" target/linux/ipq40xx/base-files/etc/inittab
+        # sed -i 's/=bbr/=cubic/' package/kernel/linux/files/sysctl-tcp-bbr.conf
+        # sed -i 's/max_requests 3/max_requests 20/g' package/network/services/uhttpd/files/uhttpd.config
+        # sed -i "s/tty\(0\|1\)::askfirst/tty\1::respawn/g" target/linux/ipq40xx/base-files/etc/inittab
          
         sed -i "s/CONFIG_WERROR=y/CONFIG_WERROR=n/" target/linux/generic/config-5.15
         sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
@@ -280,7 +280,7 @@ jobs:
         
         # 常用软件包:
         cat >> .config <<EOF
-        # CONFIG_PACKAGE_autocore is not set
+        CONFIG_PACKAGE_autocore=y
         CONFIG_PACKAGE_default-settings-chn=y
         # CONFIG_PACKAGE_automount is not set
         # CONFIG_PACKAGE_autosamba is not set
