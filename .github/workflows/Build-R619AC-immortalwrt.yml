@@ -146,7 +146,6 @@ jobs:
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
         
 
-        sed -i "/BuildPackage,miniupnpd-iptables/d" feeds/packages/net/miniupnpd/Makefile
         sed -i 's/Os/O2/g' include/target.mk
 
         sed -i 's/=bbr/=cubic/' package/kernel/linux/files/sysctl-tcp-bbr.conf
