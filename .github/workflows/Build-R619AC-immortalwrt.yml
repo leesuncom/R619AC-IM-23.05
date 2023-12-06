@@ -104,10 +104,7 @@ jobs:
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "34i sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release" package/emortal/default-settings/files/99-default-settings-chinese
-        sed "35i echo DISTRIB_DESCRIPTION='NeoBird Compiled in $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt 23.05' >> //etc/openwrt_release" package/emortal/default-settings/files/99-default-settings-chinese
-        
+        sed -i "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese        
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         
     - name: 更新订阅源
@@ -189,12 +186,12 @@ jobs:
         # LuCI插件选择:
         cat >> .config <<EOF
         CONFIG_PACKAGE_luci-app-arpbind=y
-        CONFIG_PACKAGE_luci-app-adguardhome=y
+        CONFIG_PACKAGE_luci-app-adguardhome is not set
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
-        # CONFIG_PACKAGE_luci-app-ddns is not set
-        # CONFIG_PACKAGE_luci-app-cpufreq is not set
-        # CONFIG_PACKAGE_luci-app-aliddns is not set
+        CONFIG_PACKAGE_luci-app-ddns is not set
+        CONFIG_PACKAGE_luci-app-cpufreq is not set
+        CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-mosdns=y
         CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_luci-app-argon-config=y
@@ -203,22 +200,24 @@ jobs:
         CONFIG_PACKAGE_luci-app-opkg=y
         CONFIG_PACKAGE_luci-app-firewall=y
         CONFIG_PACKAGE_luci-app-filetransfer=y
-        # CONFIG_PACKAGE_luci-app-passwall=y
-        # CONFIG_PACKAGE_luci-app-pushbot is not set
-        # CONFIG_PACKAGE_luci-app-ramfree is not set
-        # CONFIG_PACKAGE_luci-app-samba4 is not set
-        # CONFIG_PACKAGE_luci-app-ssr-plus is not set
-        # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
+        CONFIG_PACKAGE_luci-app-passwall is not set
+        CONFIG_PACKAGE_luci-app-pushbot is not set
+        CONFIG_PACKAGE_luci-app-ramfree is not set
+        CONFIG_PACKAGE_luci-app-samba4 is not set
+        CONFIG_PACKAGE_luci-app-ssr-plus is not set
+        CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
         CONFIG_PACKAGE_luci-app-smartdns=y
-        # CONFIG_PACKAGE_luci-app-sqm is not set
+        CONFIG_PACKAGE_luci-app-sqm is not set
         CONFIG_PACKAGE_luci-app-ttyd=y
         CONFIG_PACKAGE_luci-app-upnp=y
-        # CONFIG_PACKAGE_luci-app-udpxy is not set
-        # CONFIG_PACKAGE_luci-app-vsftpd is not set
+        CONFIG_PACKAGE_luci-app-udpxy is not set
+        CONFIG_PACKAGE_luci-app-vsftpd is not set
         CONFIG_PACKAGE_luci-app-vlmcsd=y     
         CONFIG_PACKAGE_luci-app-wol=y
-        # CONFIG_PACKAGE_luci-app-watchcat is not set
-        # CONFIG_PACKAGE_luci-app-zerotier is not set
+        CONFIG_PACKAGE_luci-app-aliyundrive-fuse is not set
+        CONFIG_PACKAGE_luci-app-e2guardian is not set
+        CONFIG_PACKAGE_luci-app-watchcat is not set
+        CONFIG_PACKAGE_luci-app-zerotier is not set
         EOF
         
         # LuCI主题:
@@ -228,10 +227,10 @@ jobs:
         
         # 常用软件包:
         cat >> .config <<EOF
-        CONFIG_PACKAGE_autocore=y
+        CONFIG_PACKAGE_autocore is not set
         CONFIG_PACKAGE_default-settings-chn=y
-        # CONFIG_PACKAGE_automount is not set
-        # CONFIG_PACKAGE_autosamba is not set
+        CONFIG_PACKAGE_automount is not set
+        CONFIG_PACKAGE_autosamba is not set
         EOF
         
         # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
