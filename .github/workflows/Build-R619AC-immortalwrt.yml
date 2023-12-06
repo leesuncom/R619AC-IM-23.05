@@ -88,6 +88,7 @@ jobs:
         cd openwrt/package
         mkdir NeoBird
         cd NeoBird
+        git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns
         git clone https://github.com/kiddin9/openwrt-packages.git        
        
     - name: 文件修补一
@@ -116,7 +117,8 @@ jobs:
        rm -rf feeds/packages/net/mosdns
        rm -rf feeds/packages/net/adguardhome
        rm -rf feeds/packages/net/v2ray-geodata
-       rm -rf feeds/packages/net/smartdns              
+       rm -rf feeds/packages/net/smartdns 
+       rm -rf package/openwrt-packages/smartdns
                 
     - name: 生成配置文件
       run: |
@@ -223,7 +225,7 @@ jobs:
         
         # 常用软件包:
         cat >> .config <<EOF
-        CONFIG_PACKAGE_autocore=y
+        # CONFIG_PACKAGE_autocore is not set
         CONFIG_PACKAGE_default-settings-chn=y
         # CONFIG_PACKAGE_automount is not set
         # CONFIG_PACKAGE_autosamba is not set
