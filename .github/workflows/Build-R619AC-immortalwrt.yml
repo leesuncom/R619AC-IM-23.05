@@ -90,52 +90,7 @@ jobs:
         cd openwrt/package
         mkdir NeoBird
         cd NeoBird
-        git clone https://github.com/kiddin9/openwrt-packages.git
-        # NET目录
-        
-        ########### 替换immortal的内置的adguardhome版本 ###########
-        
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/adguardhome adguardhome
-  
-        ########### 替换immortal的内置的v2ray-geodata版本 ###########
-        
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/v2ray-geodata v2ray-geodata
-   
-        ########### 替换immortal的内置的mosdns版本 ###########
-        
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns mosdns
-
-        ########### 替换immortal的内置的v2dat版本 ###########
-        
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/v2dat v2dat
-   
-        # LUIC目录
-
-        ########### 修改immortal的内置的luci-app-smartdns版本 ###########
-        
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-smartdns luci-app-smartdns
-        
-        ########### 替换immortal的内置的smartdns版本 ###########
-        
-        # git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns
-
-        ########### 修改immortal的内置的openclash版本 ###########
-        
-        # svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash luci-app-openclash
-        # sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
-        # rm luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
-        # wget -P luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
-        
-        ########### 修改immortal的内置的luci-app-mosdns版本 ###########
-        
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-mosdns NeoBird/luci-app-mosdns
-
-        ########### 修改immortal的内置的IPTV助手版本 ###########
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper luci-app-iptvhelper
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper iptvhelper/
-
-        ########### 修改immortal的内置的luci-app-adguardhome版本 ###########
-        # svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome luci-app-adguardhome
+        git clone https://github.com/kiddin9/openwrt-packages.git        
        
     - name: 文件修补一
       run: |        
@@ -144,15 +99,7 @@ jobs:
         cd openwrt
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
-        
-
-        sed -i 's/Os/O2/g' include/target.mk
-
-        sed -i 's/=bbr/=cubic/' package/kernel/linux/files/sysctl-tcp-bbr.conf
-        sed -i 's/max_requests 3/max_requests 20/g' package/network/services/uhttpd/files/uhttpd.config
-        sed -i "s/tty\(0\|1\)::askfirst/tty\1::respawn/g" target/linux/ipq40xx/base-files/etc/inittab
-
-        sed -i "s/CONFIG_WERROR=y/CONFIG_WERROR=n/" target/linux/generic/config-5.15
+        sed -i 's/Os/O2/g' include/target.mk    
         sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
