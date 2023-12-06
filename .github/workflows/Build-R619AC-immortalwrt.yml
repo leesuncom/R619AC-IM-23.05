@@ -118,7 +118,6 @@ jobs:
        rm -rf feeds/packages/net/adguardhome
        rm -rf feeds/packages/net/v2ray-geodata
        rm -rf feeds/packages/net/smartdns
-       rm -rf package/NeoBird/openwrt-packages/smartdns
                 
     - name: 生成配置文件
       run: |
