@@ -57,6 +57,7 @@ jobs:
       run: |
            echo "Free space:"
            df -h
+           
     - name: 初始化编译环境
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -80,6 +81,7 @@ jobs:
         cd openwrt
         useVersionInfo=$(git show -s --date=short --format="Author: %an<br/>date: %cd<br/>commit: %s<br/>commit hash: %H<br/>")
         echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
+        
     - name: 更新程序包
       env:
         SCKEY: ${{ secrets.ACTIONS_TRIGGER_PAT }}
@@ -102,8 +104,7 @@ jobs:
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese
-        
+        sed -i "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese     
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         
     - name: 更新订阅源
@@ -241,7 +242,8 @@ jobs:
         # 
         
         sed -i 's/^[ \t]*//g' ./.config
-        make defconfig          
+        make defconfig     
+        
     - name: 下载软件包
       id: package
       run: |
