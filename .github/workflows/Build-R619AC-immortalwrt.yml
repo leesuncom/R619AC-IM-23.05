@@ -90,7 +90,7 @@ jobs:
         cd openwrt/package
         mkdir NeoBird
         cd NeoBird
-        git clone -b 23.05 https://github.com/leesuncom/smartdns.git
+        #git clone -b 23.05 https://github.com/leesuncom/smartdns.git
         git clone https://github.com/kiddin9/openwrt-packages.git        
        
     - name: 文件修补一
@@ -122,6 +122,8 @@ jobs:
        rm -rf feeds/packages/net/v2ray-geodata
        rm -rf feeds/packages/net/smartdns 
        rm -rf package/NeoBird/openwrt-packages/smartdns
+       # 部分第三方源自带;上面命令删除不掉的请运行下面命令
+       find ./ -name smartdns | xargs rm -rf
                 
     - name: 生成配置文件
       run: |
