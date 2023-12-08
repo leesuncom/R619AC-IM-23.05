@@ -90,7 +90,7 @@ jobs:
         cd openwrt/package
         mkdir NeoBird
         cd NeoBird
-        git clone -b 23.05 https://github.com/leesuncom/smartdns.git smartdns
+        git clone -b 23.05 https://github.com/leesuncom/smartdns.git
         git clone https://github.com/kiddin9/openwrt-packages.git        
        
     - name: 文件修补一
