@@ -124,6 +124,9 @@ jobs:
        rm -rf package/NeoBird/openwrt-packages/smartdns
        # 部分第三方源自带;上面命令删除不掉的请运行下面命令
        find ./ -name smartdns | xargs rm -rf
+       cd openwrt/package
+       cd NeoBird
+       git clone -b 23.05 https://github.com/leesuncom/smartdns.git
                 
     - name: 生成配置文件
       run: |
