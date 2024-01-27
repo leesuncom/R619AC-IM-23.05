@@ -111,7 +111,7 @@ jobs:
         sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
         echo "DISTRIB_REVISION='$(date "+%Y.%m.%d")'" >> package/base-files/files/etc/openwrt_release
         sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-        echo "DISTRIB_DESCRIPTION='NeoBird Build@$(TZ=UTC-8 date +%Y.%m.%d-%H%M)" >> package/base-files/files/etc/openwrt_release
+        echo "DISTRIB_DESCRIPTION='NeoBird Build@$(TZ=UTC-8 date +%Y.%m.%d-%H%M)'" >> package/base-files/files/etc/openwrt_release
         
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
