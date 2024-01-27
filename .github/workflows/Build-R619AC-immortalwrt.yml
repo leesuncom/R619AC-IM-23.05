@@ -201,11 +201,11 @@ jobs:
         # CONFIG_PACKAGE_luci-app-samba4 is not set
         # CONFIG_PACKAGE_luci-app-ssr-plus is not set
         # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
-        # CONFIG_PACKAGE_luci-app-smartdns=y
+        CONFIG_PACKAGE_luci-app-smartdns=y
         # CONFIG_PACKAGE_luci-app-sqm is not set
         CONFIG_PACKAGE_luci-app-ttyd=y
         CONFIG_PACKAGE_luci-app-upnp=y
-        # CONFIG_PACKAGE_luci-app-udpxy is not set
+        CONFIG_PACKAGE_luci-app-udpxy=y
         # CONFIG_PACKAGE_luci-app-vsftpd is not set
         CONFIG_PACKAGE_luci-app-vlmcsd=y     
         CONFIG_PACKAGE_luci-app-wol=y
