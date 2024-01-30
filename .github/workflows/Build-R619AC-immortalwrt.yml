@@ -214,7 +214,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-vlmcsd=y     
         CONFIG_PACKAGE_luci-app-wol=y
         CONFIG_PACKAGE_luci-app-quickstart=y
-        CONFIG_PACKAGE_luci-app-istorex=y
+        # CONFIG_PACKAGE_luci-app-istorex=y
         EOF
         
         # LuCI主题:
