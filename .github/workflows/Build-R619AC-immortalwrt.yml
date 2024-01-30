@@ -118,6 +118,7 @@ jobs:
 
     - name: 文件修补二
       run: |
+        rm -rf package/NeoBird/openwrt-packages/luci-app-upnp
                 
     - name: 生成配置文件
       run: |
