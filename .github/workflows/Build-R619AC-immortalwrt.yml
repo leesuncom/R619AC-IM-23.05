@@ -205,7 +205,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-commands=y
         CONFIG_PACKAGE_luci-app-opkg=y
         CONFIG_PACKAGE_luci-app-firewall=y
-        CONFIG_PACKAGE_luci-app-filetransfer=y
+        # CONFIG_PACKAGE_luci-app-filetransfer=y
         # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         # CONFIG_PACKAGE_luci-app-ramfree is not set
