@@ -91,12 +91,13 @@ jobs:
         mkdir NeoBird
         cd NeoBird
         git clone -b v5 https://github.com/sbwml/luci-app-mosdns.git
-        git clone https://github.com/kiddin9/openwrt-packages.git        
+        # git clone https://github.com/kiddin9/openwrt-packages.git        
        
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
+        sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         sed -i 's/ImmortalWrt/NETGEAR/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
         sed -i "/wireless.\${name}.disabled/d" package/kernel/mac80211/files/lib/wifi/mac80211.sh
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
@@ -121,6 +122,8 @@ jobs:
     - name: 文件修补二
       run: |
         cd openwrt
+        rm -rf package/NeoBird/openwrt-packages/luci-app-smartdns
+        rm -rf package/NeoBird/openwrt-packages/luci-app-mosdns
         rm -rf package/NeoBird/openwrt-packages/luci-app-upnp
                 
     - name: 生成配置文件
