@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: OpenWrt-23.05 IMM
+name: OpenWrt-23.05-r619ac-IMM
 
 on:
   repository_dispatch:
