@@ -302,7 +302,7 @@ jobs:
       uses: ncipollo/release-action@v1
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: ${{ steps.organize.outputs.release_tag }} for R619AC-128M
+        name: ${{ steps.organize.outputs.release_tag }} for X86_64
         allowUpdates: true
         removeArtifacts: true
         tag: ${{ steps.organize.outputs.release_tag }}
@@ -310,8 +310,8 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ${{ env.FIRMWARE }}/*
         body: |
-          🚀 源码版本:23.05SNAPSHOT
-          🎈 内核:5.15
+          🚀 源码版本:23.05
+          🎈 内核:6.1x
           🎨 当前使用版本:【编译前的最后一次[➦主源码](${{ env.REPO_URL }})更新记录】
           🔥 下载后请仔细校验MD5，如不正确请重新下载
           ${{ env.useVersionInfo }}
