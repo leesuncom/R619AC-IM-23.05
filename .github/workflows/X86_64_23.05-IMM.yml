@@ -163,6 +163,7 @@ jobs:
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_64=y
         CONFIG_TARGET_x86_64_DEVICE_generic=y
+        CONFIG_LINUX_6_1=y
         EOF
         
         # USB2.0支持:
