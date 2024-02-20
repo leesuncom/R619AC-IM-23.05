@@ -104,17 +104,14 @@ jobs:
         sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
         echo "DISTRIB_REVISION='$(date "+%Y.%m.%d")'" >> package/base-files/files/etc/openwrt_release
         sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-        echo "DISTRIB_DESCRIPTION='NeoBird Build@$(TZ=UTC-8 date +%Y.%m.%d-%H%M)'" >> package/base-files/files/etc/openwrt_release
+        echo "DISTRIB_DESCRIPTION='NeoBird Build IMM@$(TZ=UTC-8 date +%Y.%m.%d-%H%M)'" >> package/base-files/files/etc/openwrt_release
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
         sed -i 's/Os/O2/g' include/target.mk    
         sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
-        # sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
-        # sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
-        # sed -i "33i chmod 755 /etc/smartdns/up.sh" package/emortal/default-settings/files/99-default-settings-chinese
-        # sed -i "34i sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release" package/emortal/default-settings/files/99-default-settings-chinese
-        # sed "35i echo "DISTRIB_DESCRIPTION='NeoBird Compiled in $(TZ=UTC-8 date +%Y.%m.%d-%H%M) @ OpenWrt 23.05'" >> /etc/openwrt_release" package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
         
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
