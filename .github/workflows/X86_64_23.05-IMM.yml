@@ -23,7 +23,8 @@ on:
     
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-23.05
+  # REPO_BRANCH: openwrt-23.05
+  REPO_BRANCH: master
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
@@ -97,7 +98,7 @@ jobs:
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
-        sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' target/linux/x86/Makefile
+        # sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' target/linux/x86/Makefile
         sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         sed -i 's/ImmortalWrt/NETGEAR/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
         sed -i "/wireless.\${name}.disabled/d" package/kernel/mac80211/files/lib/wifi/mac80211.sh
@@ -164,7 +165,7 @@ jobs:
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_64=y
         CONFIG_TARGET_x86_64_DEVICE_generic=y
-        CONFIG_LINUX_6_1=y
+        # CONFIG_LINUX_6_1=y
         EOF
         
         # USB2.0支持:
