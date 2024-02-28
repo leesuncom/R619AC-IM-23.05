@@ -163,20 +163,27 @@ jobs:
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_64=y
         CONFIG_TARGET_x86_64_DEVICE_generic=y
-        # CONFIG_LINUX_6_1=y
         EOF
         
         # USB2.0支持:
-        # cat >> .config <<EOF
-        # CONFIG_PACKAGE_kmod-usb-core=y
-        # CONFIG_PACKAGE_kmod-usb-dwc3=y
-        # CONFIG_PACKAGE_kmod-usb-dwc3-qcom=y
-        # CONFIG_PACKAGE_kmod-usb-storage=y
-        # CONFIG_PACKAGE_kmod-usb-storage-extras=y
-        # CONFIG_PACKAGE_kmod-usb-storage-uas=y
-        # CONFIG_PACKAGE_kmod-usb-xhci-hcd=y
-        # CONFIG_PACKAGE_kmod-usb3=y
-        # EOF
+        cat >> .config <<EOF
+        CONFIG_PACKAGE_block-mount=y
+        CONFIG_PACKAGE_fdisk=y
+        CONFIG_PACKAGE_usbutils=y
+        CONFIG_PACKAGE_badblocks=y
+        CONFIG_PACKAGE_ntfs-3g=y
+        CONFIG_PACKAGE_kmod-scsi-core=y
+        CONFIG_PACKAGE_kmod-usb-core=y
+        CONFIG_PACKAGE_kmod-usb-ohci=y
+        CONFIG_PACKAGE_kmod-usb-uhci=y
+        CONFIG_PACKAGE_kmod-usb-storage=y
+        CONFIG_PACKAGE_kmod-usb-storage-extras=y
+        CONFIG_PACKAGE_kmod-usb2=y
+        CONFIG_PACKAGE_kmod-usb3=y
+        CONFIG_PACKAGE_kmod-fs-ext4=y
+        CONFIG_PACKAGE_kmod-fs-vfat=y
+        CONFIG_PACKAGE_kmod-fuse=y
+        EOF
         
         # IPv6支持:
         cat >> .config <<EOF
@@ -209,7 +216,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         # CONFIG_PACKAGE_luci-app-ramfree is not set
-        # CONFIG_PACKAGE_luci-app-samba4 is not set
+        CONFIG_PACKAGE_luci-app-samba4=y
         # CONFIG_PACKAGE_luci-app-ssr-plus is not set
         # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
         CONFIG_PACKAGE_luci-app-smartdns=y
@@ -230,11 +237,13 @@ jobs:
         EOF
         
         # 常用软件包:
-        cat >> .config <<EOF
-        # CONFIG_PACKAGE_autocore is not set
+        cat >> .config <<EOF     
+        CONFIG_PACKAGE_luci=y
+        CONFIG_PACKAGE_default-settings=y
         CONFIG_PACKAGE_default-settings-chn=y
+        CONFIG_PACKAGE_autosamba=y
+        # CONFIG_PACKAGE_autocore is not set
         # CONFIG_PACKAGE_automount is not set
-        # CONFIG_PACKAGE_autosamba is not set
         EOF
         
         # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
