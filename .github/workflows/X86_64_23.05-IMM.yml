@@ -97,6 +97,7 @@ jobs:
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
+        curl -sfL https://github.com/leesuncom/package/raw/main/99-default-settings -o feeds/kiddin9/my-default-settings/files/etc/uci-defaults/99-default-settings
         cd openwrt
         sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
@@ -107,28 +108,10 @@ jobs:
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
         sed -i 's/Os/O2/g' include/target.mk    
-        sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
-
-        sed -i "33i sed -i 's/"NAS"/"存储"/g' /usr/lib/lua/luci/controller/quickstart.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "34i sed -i 's/"NetworkGuide"/"向导"/g' /usr/lib/lua/luci/controller/quickstart.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "35i sed -i 's/"S.M.A.R.T."/"硬盘状态"/g' /usr/lib/lua/luci/controller/quickstart.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "36i sed -i 's/"Docker"/"容器"/g' /usr/lib/lua/luci/controller/dockerman.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "37i sed -i 's#"IP/MAC Binding"#"地址绑定"#g' /usr/lib/lua/luci/controller/arpbind.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "38i sed -i 's/"MosDNS"/"域名转发"/g' /usr/lib/lua/luci/controller/mosdns.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "39i sed -i 's/"iStore"/"应用"/g' /usr/lib/lua/luci/controller/store.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "40i sed -i 's/"OpenClash"/"世界之窗"/g' /usr/lib/lua/luci/controller/openclash.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "41i sed -i 's/"KMS Server"/"微软激活"/g' /usr/lib/lua/luci/controller/vlmcsd.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "42i sed -i 's/"IPTV Helper"/"电视组播"/g' /usr/lib/lua/luci/controller/iptvhelper.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "43i sed -i 's/"DDNS-GO"/"域名解析"/g' /usr/lib/lua/luci/controller/ddns-go.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "44i sed -i 's/"Argon Config"/"主题设置"/g' /usr/share/luci/menu.d/luci-app-argon-config.json" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "45i sed -i 's/"SmartDNS"/"域名加速"/g' /usr/share/luci/menu.d/luci-app-smartdns.json" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "46i sed -i 's/"UPnP"/"即插即用"/g' /usr/share/luci/menu.d/luci-app-upnp.json" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "47i sed -i 's/"DHCP and DNS"/"动态主机"/g' /usr/share/luci/menu.d/luci-mod-network.json" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "48i sed -i 's/"Wizard"/"向导"/g' /usr/share/luci/menu.d/luci-app-wizard.json" package/emortal/default-settings/files/99-default-settings-chinese
-        sed "49i sed -i 's/"Terminal"/"终端命令"/g' /usr/share/luci/menu.d/luci-app-ttyd.json" package/emortal/default-settings/files/99-default-settings-chinese
+        # sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
+        # sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
+        # sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
+        # sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
         
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
