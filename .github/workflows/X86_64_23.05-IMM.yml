@@ -97,8 +97,8 @@ jobs:
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
-        curl -sfL https://github.com/leesuncom/R619AC-X86-IM-23.05/raw/main/patch/99-default-settings-chinese -o package/emortal/default-settings/files/99-default-settings-chinese
         cd openwrt
+        curl -sfL https://github.com/leesuncom/R619AC-X86-IM-23.05/raw/main/patch/99-default-settings-chinese -o package/emortal/default-settings/files/99-default-settings-chinese
         sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
@@ -281,6 +281,11 @@ jobs:
         cp Packages.tar.gz $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
         cd $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
         rm -rf packages
+        rm -rf *.tar.gz
+        rm -rf *.manifest
+        rm -rf *.bin
+        rm -rf *-efi.img.gz
+        rm -rf *.tar.gz
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
         echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
