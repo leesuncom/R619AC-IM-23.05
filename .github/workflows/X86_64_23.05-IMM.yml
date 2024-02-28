@@ -113,7 +113,7 @@ jobs:
         sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
 
         sed -i "33i sed -i 's/"NAS"/"存储"/g' /usr/lib/lua/luci/controller/quickstart.lua" package/emortal/default-settings/files/99-default-settings-chinese
-        sed -i "34i sed -i 's/"NetworkGuide"/"向导"/g'" /usr/lib/lua/luci/controller/quickstart.lua" package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "34i sed -i 's/"NetworkGuide"/"向导"/g' /usr/lib/lua/luci/controller/quickstart.lua" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "35i sed -i 's/"S.M.A.R.T."/"硬盘状态"/g' /usr/lib/lua/luci/controller/quickstart.lua" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "36i sed -i 's/"Docker"/"容器"/g' /usr/lib/lua/luci/controller/dockerman.lua" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "37i sed -i 's#"IP/MAC Binding"#"地址绑定"#g' /usr/lib/lua/luci/controller/arpbind.lua" package/emortal/default-settings/files/99-default-settings-chinese
