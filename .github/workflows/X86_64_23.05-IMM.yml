@@ -98,7 +98,6 @@ jobs:
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
-        # sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' target/linux/x86/Makefile
         sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
@@ -112,6 +111,24 @@ jobs:
         sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
         sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
+
+        sed -i "33i sed -i 's/"NAS"/"存储"/g'" /usr/lib/lua/luci/controller/quickstart.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "34i sed -i 's/"NetworkGuide"/"向导"/g'" /usr/lib/lua/luci/controller/quickstart.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "35i sed -i 's/"S.M.A.R.T."/"硬盘状态"/g'" /usr/lib/lua/luci/controller/quickstart.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "36i sed -i 's/"Docker"/"容器"/g'" /usr/lib/lua/luci/controller/dockerman.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "37i sed -i 's#"IP/MAC Binding"#"地址绑定"#g'" /usr/lib/lua/luci/controller/arpbind.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "38i sed -i 's/"MosDNS"/"域名转发"/g'" /usr/lib/lua/luci/controller/mosdns.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "39i sed -i 's/"iStore"/"应用"/g'" /usr/lib/lua/luci/controller/store.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "40i sed -i 's/"OpenClash"/"世界之窗"/g'" /usr/lib/lua/luci/controller/openclash.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "41i sed -i 's/"KMS Server"/"微软激活"/g'" /usr/lib/lua/luci/controller/vlmcsd.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "42i sed -i 's/"IPTV Helper"/"电视组播"/g'" /usr/lib/lua/luci/controller/iptvhelper.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "43i sed -i 's/"DDNS-GO"/"域名解析"/g'" /usr/lib/lua/luci/controller/ddns-go.lua package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "44i sed -i 's/"Argon Config"/"主题设置"/g'" /usr/share/luci/menu.d/luci-app-argon-config.json package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "45i sed -i 's/"SmartDNS"/"域名加速"/g'" /usr/share/luci/menu.d/luci-app-smartdns.json package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "46i sed -i 's/"UPnP"/"即插即用"/g'" /usr/share/luci/menu.d/luci-app-upnp.json package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "47i sed -i 's/"DHCP and DNS"/"动态主机"/g'" /usr/share/luci/menu.d/luci-mod-network.json package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i "48i sed -i 's/"Wizard"/"向导"/g'" /usr/share/luci/menu.d/luci-app-wizard.json package/emortal/default-settings/files/99-default-settings-chinese
+        sed "49i sed -i 's/"Terminal"/"终端命令"/g'" /usr/share/luci/menu.d/luci-app-ttyd.json package/emortal/default-settings/files/99-default-settings-chinese
         
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
@@ -192,8 +209,9 @@ jobs:
         CONFIG_PACKAGE_luci-app-arpbind=y
         # CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
-        # CONFIG_PACKAGE_luci-app-ddns-go=y
-        # CONFIG_PACKAGE_luci-app-diskman=y
+        CONFIG_PACKAGE_luci-app-ddns-go=y
+        CONFIG_PACKAGE_luci-app-diskman=y
+        CONFIG_PACKAGE_luci-app-dockerman=y
         # CONFIG_PACKAGE_luci-app-ddns is not set
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
@@ -201,7 +219,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_luci-app-argon-config=y
         CONFIG_PACKAGE_luci-app-autoreboot=y
-        CONFIG_PACKAGE_luci-app-commands=y
+        # CONFIG_PACKAGE_luci-app-commands=y
         CONFIG_PACKAGE_luci-app-opkg=y
         CONFIG_PACKAGE_luci-app-firewall=y
         # CONFIG_PACKAGE_luci-app-filetransfer=y
@@ -220,7 +238,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-vlmcsd=y     
         CONFIG_PACKAGE_luci-app-wol=y
         CONFIG_PACKAGE_luci-app-quickstart=y
-        # CONFIG_PACKAGE_luci-app-istorex=y
+        CONFIG_PACKAGE_luci-app-store=y
         EOF
         
         # LuCI主题:
