@@ -201,7 +201,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
         CONFIG_PACKAGE_luci-app-diskman=y
-        CONFIG_PACKAGE_luci-app-dockerman=y
+        # CONFIG_PACKAGE_luci-app-dockerman=y
         # CONFIG_PACKAGE_luci-app-ddns is not set
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
