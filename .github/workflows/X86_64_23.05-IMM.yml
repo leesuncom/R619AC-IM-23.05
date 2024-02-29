@@ -83,28 +83,20 @@ jobs:
         sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         useVersionInfo=$(git show -s --date=short --format="Author: %an<br/>date: %cd<br/>commit: %s<br/>commit hash: %H<br/>")
         echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
-        
-        
+                
     - name: 更新程序包
       env:
         SCKEY: ${{ secrets.ACTIONS_TRIGGER_PAT }}
       run: |
         ls
-        # git clone -b openwrt-22.03 https://github.com/openwrt/openwrt.git openwrt-22.03
-        # clone_repo https://github.com/openwrt/openwrt.git openwrt-22.03 openwrt-22.03 &
         cd openwrt/package
         mkdir NeoBird
         cd NeoBird
-        git clone -b openwrt-22.03 https://github.com/openwrt/openwrt.git openwrt-22.03
         git clone -b v5 https://github.com/sbwml/luci-app-mosdns.git
                    
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
-        # grep -q "1.8.8" package/network/utils/iptables/Makefile && {
-        # rm -rf package/network/utils/iptables
-        # git_clone_path openwrt-22.03 https://github.com/openwrt/openwrt package/network/utils/iptables
-        # }
         cd openwrt
         # sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         curl -sfL https://github.com/leesuncom/R619AC-X86-IM-23.05/raw/main/patch/99-default-settings-chinese -o package/emortal/default-settings/files/99-default-settings-chinese
@@ -124,24 +116,18 @@ jobs:
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    #- name: Prepare package
-     # run: |
-     #   cd openwrt
-     #   git clone -b openwrt-22.03 https://github.com/openwrt/openwrt.git openwrt-22.03
-
-    # - name: Iptables
-    #  run: |
-    #    cp -f patch/01_demote_iptables.sh ./
-    #    /bin/bash 01_demote_iptables.sh 
+    - name: 回滚补丁
+      run: |
+        cd openwrt
+        git clone -b openwrt-22.03 https://github.com/openwrt/openwrt.git openwrt-22.03
 
     - name: 文件修补二
       run: |
         cd openwrt
         # 回滚 iptables 为 1.8.7（1.8.8有一个致命bug，当上游升级至1.8.9时可以去除下面3行；具体参见https://www.netfilter.org/projects/iptables/files/changes-iptables-1.8.9.txt）
         rm -rf package/network/utils/iptables
-        cp -rf NeoBird/openwrt-22.03/package/network/utils/iptables package/network/utils/iptables
+        cp -rf openwrt-22.03/package/network/utils/iptables package/network/utils/iptables
         wget -P package/network/utils/iptables/patches/ https://github.com/coolsnowwolf/lede/raw/master/package/network/utils/iptables/patches/900-bcm-fullconenat.patch
-
         rm -rf package/NeoBird/openwrt-packages/luci-app-smartdns
         rm -rf package/NeoBird/openwrt-packages/luci-app-mosdns
         rm -rf package/NeoBird/openwrt-packages/luci-app-upnp
@@ -220,17 +206,13 @@ jobs:
         # LuCI插件选择:
         cat >> .config <<EOF
         ### DOCKER ###
-
         CONFIG_PACKAGE_luci-app-diskman=y
         
-
-
         ### DOCKER ###
         CONFIG_PACKAGE_luci-app-arpbind=y
         # CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
-
         CONFIG_PACKAGE_luci-app-mosdns=y
         CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_luci-app-argon-config=y
