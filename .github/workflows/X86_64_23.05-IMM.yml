@@ -124,8 +124,7 @@ jobs:
 
     - name: Iptables
       run: |
-        cd openwrt
-        cp -r ../patch/. ./
+        cp -f patch/01_demote_iptables.sh ./
         /bin/bash 01_demote_iptables.sh 
 
     - name: 文件修补二
