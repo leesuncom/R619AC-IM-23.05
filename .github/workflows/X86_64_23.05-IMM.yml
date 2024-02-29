@@ -122,13 +122,15 @@ jobs:
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
 
+    - name: Iptables
+      run: |
+        cd openwrt
+        cp -r ../patch/. ./
+        /bin/bash 01_demote_iptables.sh 
+
     - name: 文件修补二
       run: |
-        cp -r patch/. ./
-        
         cd openwrt
-        
-        /bin/bash 04_demote_iptables.sh
         rm -rf package/NeoBird/openwrt-packages/luci-app-smartdns
         rm -rf package/NeoBird/openwrt-packages/luci-app-mosdns
         rm -rf package/NeoBird/openwrt-packages/luci-app-upnp
