@@ -205,39 +205,29 @@ jobs:
         
         # LuCI插件选择:
         cat >> .config <<EOF
-        ### DOCKER ###
         CONFIG_PACKAGE_luci-app-diskman=y
-        
-        ### DOCKER ###
         CONFIG_PACKAGE_luci-app-arpbind=y
-        # CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         CONFIG_PACKAGE_luci-app-ddns-go=y
         CONFIG_PACKAGE_luci-app-mosdns=y
         CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_luci-app-argon-config=y
         CONFIG_PACKAGE_luci-app-autoreboot=y
-        # CONFIG_PACKAGE_luci-app-commands=y
         CONFIG_PACKAGE_luci-app-opkg=y
         CONFIG_PACKAGE_luci-app-firewall=y
         CONFIG_PACKAGE_luci-app-homeproxy=y
-        # CONFIG_PACKAGE_luci-app-filetransfer=y
-        # CONFIG_PACKAGE_luci-app-passwall=y
-        # CONFIG_PACKAGE_luci-app-pushbot is not set
-        # CONFIG_PACKAGE_luci-app-ramfree is not set
         CONFIG_PACKAGE_luci-app-samba4=y
-        # CONFIG_PACKAGE_luci-app-ssr-plus is not set
-        # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
-        CONFIG_PACKAGE_luci-app-smartdns=y
-        # CONFIG_PACKAGE_luci-app-sqm is not set
+        CONFIG_PACKAGE_luci-app-smartdns=y        
         CONFIG_PACKAGE_luci-app-ttyd=y
         CONFIG_PACKAGE_luci-app-upnp=y
-        # CONFIG_PACKAGE_luci-app-udpxy=y
-        # CONFIG_PACKAGE_luci-app-vsftpd is not set
         CONFIG_PACKAGE_luci-app-vlmcsd=y     
         CONFIG_PACKAGE_luci-app-wol=y
         CONFIG_PACKAGE_luci-app-quickstart=y
         CONFIG_PACKAGE_luci-app-store=y
+        # CONFIG_PACKAGE_luci-app-adguardhome=y
+        # CONFIG_PACKAGE_luci-app-udpxy=y
+        # CONFIG_PACKAGE_luci-app-vsftpd is not set
+        # CONFIG_PACKAGE_luci-app-sqm is not set
         EOF
         
         # LuCI主题:
@@ -250,7 +240,6 @@ jobs:
         CONFIG_PACKAGE_luci=y
         CONFIG_PACKAGE_default-settings=y
         CONFIG_PACKAGE_default-settings-chn=y
-        CONFIG_PACKAGE_block-mount=y
         CONFIG_PACKAGE_autosamba=y
         # CONFIG_PACKAGE_autocore is not set
         # CONFIG_PACKAGE_automount is not set
