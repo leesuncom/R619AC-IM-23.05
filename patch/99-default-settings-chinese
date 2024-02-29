@@ -29,7 +29,7 @@ fi
 
 sed -i.bak "s,https://downloads.immortalwrt.org,$opkg_mirror,g" "/etc/opkg/distfeeds.conf"
 
-set network.lan.gateway=192.168.1.1
+uci set network.lan.gateway=192.168.1.1
 uci set network.lan.dns=127.0.0.1
 sed -i '/option ip6assign/d' /etc/config/network
 uci commit network
