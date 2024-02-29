@@ -93,8 +93,7 @@ jobs:
         mkdir NeoBird
         cd NeoBird
         git clone -b v5 https://github.com/sbwml/luci-app-mosdns.git
-        # git clone https://github.com/kiddin9/openwrt-packages.git        
-       
+        
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
@@ -209,7 +208,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         # CONFIG_PACKAGE_luci-app-ramfree is not set
-        # CONFIG_PACKAGE_luci-app-samba4 is not set
+        CONFIG_PACKAGE_luci-app-samba4=y
         # CONFIG_PACKAGE_luci-app-ssr-plus is not set
         # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
         CONFIG_PACKAGE_luci-app-smartdns=y
@@ -234,7 +233,7 @@ jobs:
         # CONFIG_PACKAGE_autocore is not set
         CONFIG_PACKAGE_default-settings-chn=y
         # CONFIG_PACKAGE_automount is not set
-        # CONFIG_PACKAGE_autosamba is not set
+        CONFIG_PACKAGE_autosamba=y
         EOF
         
         # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
