@@ -83,7 +83,7 @@ jobs:
         sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         useVersionInfo=$(git show -s --date=short --format="Author: %an<br/>date: %cd<br/>commit: %s<br/>commit hash: %H<br/>")
         echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
-                
+        
     - name: 更新程序包
       env:
         SCKEY: ${{ secrets.ACTIONS_TRIGGER_PAT }}
@@ -93,12 +93,12 @@ jobs:
         mkdir NeoBird
         cd NeoBird
         git clone -b v5 https://github.com/sbwml/luci-app-mosdns.git
-                   
+        # git clone https://github.com/kiddin9/openwrt-packages.git        
+       
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
         cd openwrt
-        # sed -i '$a src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
         curl -sfL https://github.com/leesuncom/R619AC-X86-IM-23.05/raw/main/patch/99-default-settings-chinese -o package/emortal/default-settings/files/99-default-settings-chinese
         sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
         sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
@@ -107,11 +107,7 @@ jobs:
         echo "DISTRIB_DESCRIPTION='NeoBird Build IMM@$(TZ=UTC-8 date +%Y.%m.%d-%H%M)'" >> package/base-files/files/etc/openwrt_release
         sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
         sed -i 's/ImmortalWrt/NeoBird/g' package/base-files/files/bin/config_generate
-        sed -i 's/Os/O2/g' include/target.mk    
-        # sed -i "29i uci set network.lan.gateway=192.168.1.1" package/emortal/default-settings/files/99-default-settings-chinese
-        # sed -i "30i uci set network.lan.dns=127.0.0.1" package/emortal/default-settings/files/99-default-settings-chinese
-        # sed -i "31i sed -i '/option ip6assign/d' /etc/config/network" package/emortal/default-settings/files/99-default-settings-chinese
-        # sed -i "32i uci commit network"  package/emortal/default-settings/files/99-default-settings-chinese
+        sed -i 's/Os/O2/g' include/target.mk
         
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
@@ -171,24 +167,16 @@ jobs:
         EOF
         
         # USB2.0支持:
-        cat >> .config <<EOF
-        CONFIG_PACKAGE_block-mount=y
-        CONFIG_PACKAGE_fdisk=y
-        CONFIG_PACKAGE_usbutils=y
-        CONFIG_PACKAGE_badblocks=y
-        CONFIG_PACKAGE_ntfs-3g=y
-        CONFIG_PACKAGE_kmod-scsi-core=y
-        CONFIG_PACKAGE_kmod-usb-core=y
-        CONFIG_PACKAGE_kmod-usb-ohci=y
-        CONFIG_PACKAGE_kmod-usb-uhci=y
-        CONFIG_PACKAGE_kmod-usb-storage=y
-        CONFIG_PACKAGE_kmod-usb-storage-extras=y
-        CONFIG_PACKAGE_kmod-usb2=y
-        CONFIG_PACKAGE_kmod-usb3=y
-        CONFIG_PACKAGE_kmod-fs-ext4=y
-        CONFIG_PACKAGE_kmod-fs-vfat=y
-        CONFIG_PACKAGE_kmod-fuse=y
-        EOF
+        # cat >> .config <<EOF
+        # CONFIG_PACKAGE_kmod-usb-core=y
+        # CONFIG_PACKAGE_kmod-usb-dwc3=y
+        # CONFIG_PACKAGE_kmod-usb-dwc3-qcom=y
+        # CONFIG_PACKAGE_kmod-usb-storage=y
+        # CONFIG_PACKAGE_kmod-usb-storage-extras=y
+        # CONFIG_PACKAGE_kmod-usb-storage-uas=y
+        # CONFIG_PACKAGE_kmod-usb-xhci-hcd=y
+        # CONFIG_PACKAGE_kmod-usb3=y
+        # EOF
         
         # IPv6支持:
         cat >> .config <<EOF
@@ -201,29 +189,39 @@ jobs:
         
         # LuCI插件选择:
         cat >> .config <<EOF
-        CONFIG_PACKAGE_luci-app-diskman=y
         CONFIG_PACKAGE_luci-app-arpbind=y
+        # CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
-        CONFIG_PACKAGE_luci-app-ddns-go=y
+        # CONFIG_PACKAGE_luci-app-ddns-go=y
+        # CONFIG_PACKAGE_luci-app-diskman=y
+        # CONFIG_PACKAGE_luci-app-ddns is not set
+        # CONFIG_PACKAGE_luci-app-cpufreq is not set
+        # CONFIG_PACKAGE_luci-app-aliddns is not set
         CONFIG_PACKAGE_luci-app-mosdns=y
+        CONFIG_PACKAGE_luci-app-homeproxy=y
         CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_luci-app-argon-config=y
         CONFIG_PACKAGE_luci-app-autoreboot=y
+        CONFIG_PACKAGE_luci-app-commands=y
         CONFIG_PACKAGE_luci-app-opkg=y
         CONFIG_PACKAGE_luci-app-firewall=y
-        CONFIG_PACKAGE_luci-app-homeproxy=y
-        CONFIG_PACKAGE_luci-app-samba4=y
-        CONFIG_PACKAGE_luci-app-smartdns=y        
+        # CONFIG_PACKAGE_luci-app-filetransfer=y
+        # CONFIG_PACKAGE_luci-app-passwall=y
+        # CONFIG_PACKAGE_luci-app-pushbot is not set
+        # CONFIG_PACKAGE_luci-app-ramfree is not set
+        # CONFIG_PACKAGE_luci-app-samba4 is not set
+        # CONFIG_PACKAGE_luci-app-ssr-plus is not set
+        # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
+        CONFIG_PACKAGE_luci-app-smartdns=y
+        # CONFIG_PACKAGE_luci-app-sqm is not set
         CONFIG_PACKAGE_luci-app-ttyd=y
         CONFIG_PACKAGE_luci-app-upnp=y
+        # CONFIG_PACKAGE_luci-app-udpxy=y
+        # CONFIG_PACKAGE_luci-app-vsftpd is not set
         CONFIG_PACKAGE_luci-app-vlmcsd=y     
         CONFIG_PACKAGE_luci-app-wol=y
         CONFIG_PACKAGE_luci-app-quickstart=y
         CONFIG_PACKAGE_luci-app-store=y
-        # CONFIG_PACKAGE_luci-app-adguardhome=y
-        # CONFIG_PACKAGE_luci-app-udpxy=y
-        # CONFIG_PACKAGE_luci-app-vsftpd is not set
-        # CONFIG_PACKAGE_luci-app-sqm is not set
         EOF
         
         # LuCI主题:
@@ -232,13 +230,11 @@ jobs:
         EOF
         
         # 常用软件包:
-        cat >> .config <<EOF     
-        CONFIG_PACKAGE_luci=y
-        CONFIG_PACKAGE_default-settings=y
-        CONFIG_PACKAGE_default-settings-chn=y
-        CONFIG_PACKAGE_autosamba=y
+        cat >> .config <<EOF
         # CONFIG_PACKAGE_autocore is not set
+        CONFIG_PACKAGE_default-settings-chn=y
         # CONFIG_PACKAGE_automount is not set
+        # CONFIG_PACKAGE_autosamba is not set
         EOF
         
         # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
@@ -285,11 +281,6 @@ jobs:
         cp Packages.tar.gz $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
         cd $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
         rm -rf packages
-        rm -rf *.tar.gz
-        rm -rf *.manifest
-        rm -rf *.bin
-        rm -rf *-efi.img.gz
-        rm -rf *.tar.gz
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
         echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
@@ -312,7 +303,7 @@ jobs:
       uses: ncipollo/release-action@v1
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: ${{ steps.organize.outputs.release_tag }} for X86_64
+        name: ${{ steps.organize.outputs.release_tag }} for R619AC-128M
         allowUpdates: true
         removeArtifacts: true
         tag: ${{ steps.organize.outputs.release_tag }}
@@ -320,8 +311,8 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ${{ env.FIRMWARE }}/*
         body: |
-          🚀 源码版本:23.05
-          🎈 内核:6.1x
+          🚀 源码版本:23.05SNAPSHOT
+          🎈 内核:5.15
           🎨 当前使用版本:【编译前的最后一次[➦主源码](${{ env.REPO_URL }})更新记录】
           🔥 下载后请仔细校验MD5，如不正确请重新下载
           ${{ env.useVersionInfo }}
