@@ -29,9 +29,12 @@ fi
 
 sed -i.bak "s,https://downloads.immortalwrt.org,$opkg_mirror,g" "/etc/opkg/distfeeds.conf"
 
-uci set network.lan.gateway=192.168.1.1
-uci set network.lan.dns=127.0.0.1
-sed -i '/option ip6assign/d' /etc/config/network
+uci set dhcp.lan.ignore=1 # 关掉lan的dhcp
+uci commit dhcp
+
+uci set network.lan.gateway=192.168.1.1 # 网关指向上级路由
+uci set network.lan.dns=127.0.0.1 # dns指向上级路由
+sed -i '/option ip6assign/d' /etc/config/network # 关闭IP6
 uci commit network
 
 sed -i 's/"NAS"/"存储"/g' /usr/lib/lua/luci/controller/quickstart.lua
