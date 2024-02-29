@@ -116,14 +116,10 @@ jobs:
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    - name: 回滚补丁
-      run: |
-        cd openwrt
-        git clone -b openwrt-22.03 https://github.com/openwrt/openwrt.git openwrt-22.03
-
     - name: 文件修补二
       run: |
         cd openwrt
+        git clone -b openwrt-22.03 https://github.com/openwrt/openwrt.git openwrt-22.03
         # 回滚 iptables 为 1.8.7（1.8.8有一个致命bug，当上游升级至1.8.9时可以去除下面3行；具体参见https://www.netfilter.org/projects/iptables/files/changes-iptables-1.8.9.txt）
         rm -rf package/network/utils/iptables
         cp -rf openwrt-22.03/package/network/utils/iptables package/network/utils/iptables
