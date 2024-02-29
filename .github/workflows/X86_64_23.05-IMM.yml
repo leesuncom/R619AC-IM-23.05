@@ -90,12 +90,13 @@ jobs:
         SCKEY: ${{ secrets.ACTIONS_TRIGGER_PAT }}
       run: |
         ls
+        # git clone -b openwrt-22.03 https://github.com/openwrt/openwrt.git openwrt-22.03
+        # clone_repo https://github.com/openwrt/openwrt.git openwrt-22.03 openwrt-22.03 &
         cd openwrt/package
         mkdir NeoBird
         cd NeoBird
         git clone -b v5 https://github.com/sbwml/luci-app-mosdns.git
-        # git clone https://github.com/kiddin9/openwrt-packages.git        
-       
+                   
     - name: 文件修补一
       run: |        
         cp -f patch/rc.local openwrt/package/base-files/files/etc/rc.local
@@ -121,6 +122,11 @@ jobs:
         
     - name: 更新订阅源
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
+
+    - name: Prepare package
+      run: |
+        cd openwrt
+        clone_repo https://github.com/openwrt/openwrt.git openwrt-22.03 openwrt-22.03 &
 
     - name: Iptables
       run: |
