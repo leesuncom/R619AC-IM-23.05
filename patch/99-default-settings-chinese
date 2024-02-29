@@ -51,5 +51,6 @@ sed -i 's/"UPnP"/"即插即用"/g' /usr/share/luci/menu.d/luci-app-upnp.json
 sed -i 's/"DHCP and DNS"/"动态主机"/g' /usr/share/luci/menu.d/luci-mod-network.json
 sed -i 's/"Wizard"/"向导"/g' /usr/share/luci/menu.d/luci-app-wizard.json
 sed -i 's/"Terminal"/"终端命令"/g' /usr/share/luci/menu.d/luci-app-ttyd.json
+sed -i 's/"HomeProxy"/"域名代理"/g' /usr/share/luci/menu.d/luci-app-homeproxy.json
 
 exit 0
