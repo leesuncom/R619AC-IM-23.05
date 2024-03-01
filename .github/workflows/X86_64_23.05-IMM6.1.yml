@@ -188,7 +188,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         # CONFIG_PACKAGE_luci-app-ddns-go=y
-        CONFIG_PACKAGE_luci-app-diskman=y
+        # CONFIG_PACKAGE_luci-app-diskman=y
         # CONFIG_PACKAGE_luci-app-ddns is not set
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
@@ -204,7 +204,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-passwall=y
         # CONFIG_PACKAGE_luci-app-pushbot is not set
         # CONFIG_PACKAGE_luci-app-ramfree is not set
-        # CONFIG_PACKAGE_luci-app-samba4 is not set
+        CONFIG_PACKAGE_luci-app-samba4=y
         # CONFIG_PACKAGE_luci-app-ssr-plus is not set
         # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
         CONFIG_PACKAGE_luci-app-smartdns=y
