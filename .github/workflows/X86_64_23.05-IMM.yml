@@ -119,13 +119,6 @@ jobs:
         rm -rf package/network/utils/iptables
         cp -rf openwrt-22.03/package/network/utils/iptables package/network/utils/iptables
         wget -P package/network/utils/iptables/patches/ https://github.com/coolsnowwolf/lede/raw/master/package/network/utils/iptables/patches/900-bcm-fullconenat.patch
-       
-        rm -rf feeds/luci/applications/luci-app-homeproxy
-        rm -rf feeds/luci/applications/luci-app-openclash
-        rm -rf feeds/luci/applications/luci-app-opkg
-        rm -rf feeds/luci/applications/luci-app-samba4
-        rm -rf feeds/luci/applications/luci-app-smartdns
-        rm -rf feeds/luci/applications/luci-app-vlmcsd
                 
     - name: 生成配置文件
       run: |
