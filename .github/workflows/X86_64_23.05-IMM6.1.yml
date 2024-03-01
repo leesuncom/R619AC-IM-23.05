@@ -118,7 +118,7 @@ jobs:
         rm -rf package/network/utils/iptables
         cp -rf openwrt-22.03/package/network/utils/iptables package/network/utils/iptables
         wget -P package/network/utils/iptables/patches/ https://github.com/coolsnowwolf/lede/raw/master/package/network/utils/iptables/patches/900-bcm-fullconenat.patch
-                
+        rm -rf feeds/luci/applications/luci-app-diskman        
     - name: 生成配置文件
       run: |
         cd openwrt
@@ -188,7 +188,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         # CONFIG_PACKAGE_luci-app-ddns-go=y
-        # CONFIG_PACKAGE_luci-app-diskman=y
+        CONFIG_PACKAGE_luci-app-diskman=y
         # CONFIG_PACKAGE_luci-app-ddns is not set
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
