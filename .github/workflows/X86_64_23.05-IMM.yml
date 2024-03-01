@@ -464,7 +464,7 @@ jobs:
         cp Packages.tar.gz $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
         cd $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
         rm -rf packages
-        config.buildinfo
+        rm -rf config.buildinfo
         rm -rf *-x86-64-generic-kernel.bin
         rm -rf *-x86-64-generic.manifest
         rm -rf *-x86-64-generic-squashfs-rootfs.img.gz
