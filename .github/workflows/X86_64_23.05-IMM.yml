@@ -291,7 +291,7 @@ jobs:
         CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_luci-app-opkg=y
         CONFIG_PACKAGE_luci-app-quickstart=y
-        CONFIG_PACKAGE_luci-app-samba4=y
+        # CONFIG_PACKAGE_luci-app-samba4=y
         CONFIG_PACKAGE_luci-app-smartdns=y
         CONFIG_PACKAGE_luci-app-store=y
         CONFIG_PACKAGE_luci-app-ttyd=y
