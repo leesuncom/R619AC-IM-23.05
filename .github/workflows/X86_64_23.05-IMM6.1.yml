@@ -120,9 +120,6 @@ jobs:
         rm -rf package/network/utils/iptables
         cp -rf openwrt-22.03/package/network/utils/iptables package/network/utils/iptables
         wget -P package/network/utils/iptables/patches/ https://github.com/coolsnowwolf/lede/raw/master/package/network/utils/iptables/patches/900-bcm-fullconenat.patch
-        rm -rf package/NeoBird/openwrt-packages/luci-app-smartdns
-        rm -rf package/NeoBird/openwrt-packages/luci-app-mosdns
-        rm -rf package/NeoBird/openwrt-packages/luci-app-upnp
                 
     - name: 生成配置文件
       run: |
