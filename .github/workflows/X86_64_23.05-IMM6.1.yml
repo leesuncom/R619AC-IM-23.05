@@ -23,8 +23,8 @@ on:
     
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  # REPO_BRANCH: openwrt-23.05
-  REPO_BRANCH: master
+  REPO_BRANCH: openwrt-23.05
+  # REPO_BRANCH: master
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
@@ -188,7 +188,7 @@ jobs:
         # CONFIG_PACKAGE_luci-app-adguardhome=y
         CONFIG_PACKAGE_luci-app-iptvhelper=y
         # CONFIG_PACKAGE_luci-app-ddns-go=y
-        # CONFIG_PACKAGE_luci-app-diskman=y
+        CONFIG_PACKAGE_luci-app-diskman=y
         # CONFIG_PACKAGE_luci-app-ddns is not set
         # CONFIG_PACKAGE_luci-app-cpufreq is not set
         # CONFIG_PACKAGE_luci-app-aliddns is not set
@@ -229,7 +229,7 @@ jobs:
         # CONFIG_PACKAGE_autocore is not set
         CONFIG_PACKAGE_default-settings-chn=y
         # CONFIG_PACKAGE_automount is not set
-        # CONFIG_PACKAGE_autosamba is not set
+        CONFIG_PACKAGE_autosamba=y
         EOF
         
         # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
