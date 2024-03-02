@@ -29,11 +29,9 @@ mv -f feeds/jell/r81* tmp/
 sed -i "s/192.168.1/192.168.1.2/" package/feeds/jell/base-files/files/bin/config_generate
 sed -i "s/192.168.1/192.168.1.2/" package/base-files/files/bin/config_generate
 
-(
-svn co https://github.com/coolsnowwolf/lede/trunk/target/linux/generic/hack-5.15 target/linux/generic/hack-5.15
+git_clone_path master https://github.com/coolsnowwolf/lede target/linux/generic/hack-5.15
 curl -sfL https://raw.githubusercontent.com/coolsnowwolf/lede/master/target/linux/generic/pending-5.15/613-netfilter_optional_tcp_window_check.patch -o target/linux/generic/pending-5.15/613-netfilter_optional_tcp_window_check.patch
 sed -i "s/CONFIG_WERROR=y/CONFIG_WERROR=n/" target/linux/generic/config-5.15
-) &
 
 # NeoBird
 sed -i 's/^IMG_PREFIX\:\=.*/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)-$(shell TZ=UTC-8 date +"%Y.%m.%d-%H%M")-$(IMG_PREFIX_VERNUM)$(IMG_PREFIX_VERCODE)$(IMG_PREFIX_EXTRA)$(BOARD)$(if $(SUBTARGET),-$(SUBTARGET))/g' include/image.mk
