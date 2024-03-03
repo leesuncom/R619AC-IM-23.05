@@ -15,9 +15,6 @@ on:
         type: choice
         options:
           - 'openwrt-23.05'
-          - 'openwrt-22.03'
-          - 'openwrt-21.02'
-          - 'openwrt-19.07'
           - 'master'
       CONFIG_FILE:
         description: '请选择配置文件'
@@ -25,9 +22,6 @@ on:
         default: 'x86_64'
         type: choice
         options:
-          - '1907-phicomm-k3'
-          - 'aarch64'
-          - 'phicomm_k3'
           - 'x86_64'
       CPU_SELECTION:
         description: 'CPU优选,增加编译速度'
@@ -69,17 +63,11 @@ on:
         required: false
         default: 'true'
         type: boolean
-      UPDATE_FIRMWARE_ONLINE:
-        description: '增加在线更新固件功能/自动打包Amlogic_Rockchip系列固件'
-        required: false
-        default: 'false'
-        type: boolean
       COMPILATION_INFORMATION:
         description: '是否显示编译信息'
         required: false
         default: 'true'
         type: boolean
-
 
 # 定时触发开启开始编译(把下面两个#去掉开启,时间设置请看定时开启编译说明)
 #  schedule:
