@@ -26,10 +26,9 @@ on:
       CONFIG_OPKG:
         description: '请选择配置插件源'
         required: true
-        default: '默认'
+        default: 'https://github.com/shidahuilang/openwrt-package.git'
         type: choice
         options:
-          - '默认'
           - 'https://github.com/shidahuilang/openwrt-package.git' 
           - 'https://github.com/kenzok8/jell.git'    
       CPU_SELECTION:
