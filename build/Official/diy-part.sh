@@ -90,6 +90,12 @@ sed -i 's/"UPnP"/"即插即用"/g' `egrep "UPnP" -rl ./`
 sed -i 's#"DHCP/DNS"#"动态主机"#g' `egrep "DHCP/DNS" -rl ./`
 sed -i 's#"IP/MAC绑定"#"地址绑定"#g' `egrep "IP/MAC绑定" -rl ./`
 sed -i 's/"HomeProxy"/"域名代理"/g' `egrep "HomeProxy" -rl ./`
+
+if [[ "${CONFIG_OPKG}" == "https://github.com/shidahuilang/openwrt-package.git" ]]; then
+  sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luci/luci-app-store/luasrc/controller/store.lua`
+else
+  sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luasrc/controller/store.lua`
+fi
 # sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luci/luci-app-store/luasrc/controller/store.lua`
 # sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luasrc/controller/store.lua`
 
