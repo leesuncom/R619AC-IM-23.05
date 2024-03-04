@@ -26,7 +26,7 @@ on:
       CONFIG_OPKG:
         description: '请选择配置插件源'
         required: true
-        default: 'https://github.com/kenzok8/jell.git'
+        default: '默认'
         type: choice
         options:
           - 'https://github.com/shidahuilang/openwrt-package.git' 
