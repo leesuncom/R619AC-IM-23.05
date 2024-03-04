@@ -29,6 +29,7 @@ on:
         default: '默认'
         type: choice
         options:
+          - '默认'
           - 'https://github.com/shidahuilang/openwrt-package.git' 
           - 'https://github.com/kenzok8/jell.git'    
       CPU_SELECTION:
