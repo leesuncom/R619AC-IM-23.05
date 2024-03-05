@@ -78,6 +78,7 @@ sed -i 's/"网络存储"/"NAS"/g' `egrep "网络存储" -rl ./`
 sed -i 's/"Turbo ACC 网络加速"/"网络加速"/g' `egrep "Turbo ACC 网络加速" -rl ./`
 sed -i 's/"实时流量监测"/"流量"/g' `egrep "实时流量监测" -rl ./`
 sed -i 's/"KMS 服务器"/"KMS激活"/g' `egrep "KMS 服务器" -rl ./`
+# sed -i 's/"TTYD 终端"/"TTYD"/g' `egrep "TTYD 终端" -rl ./`
 sed -i 's/"USB 打印服务器"/"打印服务"/g' `egrep "USB 打印服务器" -rl ./`
 sed -i 's/"Web 管理"/"Web管理"/g' `egrep "Web 管理" -rl ./`
 sed -i 's/"管理权"/"管理密码"/g' `egrep "管理权" -rl ./`
@@ -89,11 +90,14 @@ sed -i 's/"UPnP"/"即插即用"/g' `egrep "UPnP" -rl ./`
 sed -i 's#"DHCP/DNS"#"动态主机"#g' `egrep "DHCP/DNS" -rl ./`
 sed -i 's#"IP/MAC绑定"#"地址绑定"#g' `egrep "IP/MAC绑定" -rl ./`
 sed -i 's/"HomeProxy"/"域名代理"/g' `egrep "HomeProxy" -rl ./`
+
 if [[ "${CONFIG_OPKG}" == "https://github.com/shidahuilang/openwrt-package.git" ]]; then
   sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luci/luci-app-store/luasrc/controller/store.lua`
 else
   sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luasrc/controller/store.lua`
 fi
+# sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luci/luci-app-store/luasrc/controller/store.lua`
+# sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luasrc/controller/store.lua`
 
 # 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间(根据编译机型变化,自行调整删除名称)
 cat >"$CLEAR_PATH" <<-EOF
