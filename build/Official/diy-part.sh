@@ -89,7 +89,8 @@ sed -i 's/"MosDNS"/"域名转发"/g' `egrep "MosDNS" -rl ./`
 sed -i 's/"UPnP"/"即插即用"/g' `egrep "UPnP" -rl ./`
 sed -i 's#"DHCP/DNS"#"动态主机"#g' `egrep "DHCP/DNS" -rl ./`
 sed -i 's#"IP/MAC绑定"#"地址绑定"#g' `egrep "IP/MAC绑定" -rl ./`
-sed -i 's/"HomeProxy"/"域名代理"/g' `egrep "HomeProxy" -rl ./`
+sed -i 's/"Docker"/"容器"/g' `egrep "Docker" -rl ./`
+sed -i 's/"AdGuard Home"/"广告拦截"/g' `egrep "AdGuard Home" -rl ./`
 sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/langge1/luci-app-store/luci/luci-app-store/luasrc/controller/store.lua`
 # sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luasrc/controller/store.lua`
 
