@@ -34,7 +34,7 @@ export Enable_IPV4_function="0"             # 编译IPV4固件(1为启用命令,
 export PassWall_luci_branch="0"             # passwall的源码分别有【luci分支】和【luci-smartdns-new-version分支】(填0为使用luci分支,填1为使用luci-smartdns-new-version分支)
 
 # 替换OpenClash的源码(默认master分支)
-export OpenClash_branch="0"                 # OpenClash的源码分别有【master分支】和【dev分支】(填0为使用master分支,填1为使用dev分支)
+export OpenClash_branch="1"                 # OpenClash的源码分别有【master分支】和【dev分支】(填0为使用master分支,填1为使用dev分支)
 export OpenClash_Core="2"                   # 增加OpenClash时,把核心下载好,(填1为下载【dev单核】,填2为下载【dev/meta/premium三核】,填0为不需要核心)
 
 # 个性签名,默认增加年月日[$(TZ=UTC-8 date "+%Y.%m.%d")]
@@ -78,17 +78,28 @@ export kernel_usage="stable"
 # cp -rf https://github.com/coolsnowwolf/lede/blob/master/package/network/utils/iptables/patches/900-bcm-fullconenat.patch ./package/network/utils/iptables/patches/900-bcm-fullconenat.patch
 
 # 修改插件名字
-sed -i 's/"TTYD"/"终端"/g' `egrep "TTYD" -rl ./`
+sed -i 's/"TTYD"/"终端命令"/g' `egrep "TTYD" -rl ./`
 sed -i 's/"aMule设置"/"电驴下载"/g' `egrep "aMule设置" -rl ./`
 sed -i 's/"网络存储"/"NAS"/g' `egrep "网络存储" -rl ./`
 sed -i 's/"Turbo ACC 网络加速"/"网络加速"/g' `egrep "Turbo ACC 网络加速" -rl ./`
 sed -i 's/"实时流量监测"/"流量"/g' `egrep "实时流量监测" -rl ./`
 sed -i 's/"KMS 服务器"/"KMS激活"/g' `egrep "KMS 服务器" -rl ./`
-sed -i 's/"TTYD 终端"/"TTYD"/g' `egrep "TTYD 终端" -rl ./`
+# sed -i 's/"TTYD 终端"/"TTYD"/g' `egrep "TTYD 终端" -rl ./`
 sed -i 's/"USB 打印服务器"/"打印服务"/g' `egrep "USB 打印服务器" -rl ./`
 sed -i 's/"Web 管理"/"Web管理"/g' `egrep "Web 管理" -rl ./`
-sed -i 's/"管理权"/"改密码"/g' `egrep "管理权" -rl ./`
+sed -i 's/"管理权"/"管理密码"/g' `egrep "管理权" -rl ./`
 sed -i 's/"带宽监控"/"监控"/g' `egrep "带宽监控" -rl ./`
+sed -i 's/"Argon设置"/"主题设置"/g' `egrep "Argon设置" -rl ./`
+sed -i 's/"SmartDNS"/"域名加速"/g' `egrep "SmartDNS" -rl ./`
+sed -i 's/"MosDNS"/"域名转发"/g' `egrep "MosDNS" -rl ./`
+sed -i 's/"UPnP"/"即插即用"/g' `egrep "UPnP" -rl ./`
+sed -i 's#"DHCP/DNS"#"动态主机"#g' `egrep "DHCP/DNS" -rl ./`
+sed -i 's#"IP/MAC绑定"#"地址绑定"#g' `egrep "IP/MAC绑定" -rl ./`
+# sed -i 's/"Docker"/"容器"/g' `egrep "Docker" -rl ./`
+# sed -i 's/"AdGuard Home"/"广告拦截"/g' `egrep "AdGuard Home" -rl ./`
+# sed -i 's/"OpenClash"/"世界之窗"/g' `egrep "OpenClash" -rl ./`
+sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/langge1/luci-app-store/luci/luci-app-store/luasrc/controller/store.lua`
+# sed -i '16s/"iStore"/"应用"/g' `egrep "iStore" -rl feeds/dalang/luci-app-store/luasrc/controller/store.lua`
 
 
 # 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间(根据编译机型变化,自行调整删除名称)
