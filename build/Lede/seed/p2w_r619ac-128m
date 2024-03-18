@@ -15,7 +15,7 @@ CONFIG_TARGET_BOARD="ipq40xx"
 # CONFIG_PACKAGE_luci-base=y
 # CONFIG_PACKAGE_luci-app-smartdns=y
 # CONFIG_PACKAGE_luci-app-ttyd=y
-CONFIG_PACKAGE_luci-app-upnp=y
+# CONFIG_PACKAGE_luci-app-upnp=y
 # CONFIG_PACKAGE_luci-app-wolplus=y
 # CONFIG_PACKAGE_luci-compat=y
 
