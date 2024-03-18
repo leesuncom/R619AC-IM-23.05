@@ -14,9 +14,6 @@ on:
         type: choice
         options:
           - 'openwrt-23.05'
-          - 'openwrt-21.02'
-          - 'openwrt-18.06'
-          - 'openwrt-18.06-k5.4'
           - 'master'
       CONFIG_FILE:
         description: '请选择[seed文件夹内]的配置文件'
@@ -25,7 +22,7 @@ on:
         type: choice
         options:
           - 'x86_64'
-          - 'aarch64'
+          - 'p2w_r619ac-128m'
       CPU_SELECTION:
         description: 'CPU优选,增加编译速度'
         required: true
